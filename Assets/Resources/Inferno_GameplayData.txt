@@ -1,0 +1,1074 @@
+Gameplay descriptions, prompts and outcomes
+
+
+
+
+TITLE SCREEN QUOTE:
+"Hope not ever to see Heaven. I have come to lead you to the
+other shore; into eternal darkness; into fire and into ice.""
+
+
+
+
+1 ########## Surface: 
+
+1_1
+Description: 
+You see Dante up ahead in the distance, looking lost and forlorn, wandering in the woods.
+
+Prompt: You have only one option. You must follow Dante...
+	
+	Good: +1 Courage
+	- You find your courage and resolve to follow Dante
+	Neutral: +1 Courage, -1 Prudence
+	- You find courage and resolve to follow Dante, but in your heart you know this is probably not a good idea.
+	Bad: -1 Prudence
+	- You foolishly follow Dante.
+
+
+
+1_2
+Description: 
+You see a panther confront Dante and force him to retrace his steps and go around. 
+	
+	
+	Prompt: What will you do? 1) Confront the panther 2) Follow Dante 3) Run away
+	
+	Good: +1 Courage
+	1) - You bravely confront the panther, standing tall and fearless before it. The beast slinks away and allows you to pass.
+	
+	Neutral: +1 Prudence, -1 Courage
+	2) - You wisely decide to follow Dante and keep your distance from the panther, but in your heart you feel like a coward.
+	
+	Bad: -1 Courage
+	3) - At the sight of the panther you flee, running blindly into the forest away from the beast. After some time blindly stumbling around you spot Dante in the distance. You feel ashamed of your cowardice.
+
+
+
+1_3
+Description: 
+You see a lion confront Dante with its head held aloft and hunger-mad, followed by a wolf at it's heels. Dante is overwhelmed with fear, but is rescued by the gohst of the Roman poet Virgil, who leads him on up ahead.
+	
+		
+	Prompt: You can confront the lion and the wolf, potentially increasing your courage, but you risk having your courage fail as well if you are overwhelmed and are forced to flee.
+	1) Confront the lion and the wolf. 
+		Good: +1 Courage, +1 Faith
+		- You bravely confront the lion and the wolf. They submit to your dominance and allow you to pass unhindered.	
+		
+		Bad: -1  Courage, -1 Faith
+		- You confront the lion and the wolf but are quickly overwhelmed with fear and turn and flee. You are ashamed of your cowardice and feel your faith diminish.
+	
+	2) Keep your distance
+		Neutral: +1 Prudence, -1 Courage
+		- You wisely keep your distance from the lion and the wolf, taking the long way around, but in your heart you feel a coward.
+	
+	
+
+1_4
+Description: 
+You watch from a distance as Virgil speaks to Dante. You cannot hear what he is saying, and soon he is leading Dante away to some unknown place in the distance.
+	
+You recognize the ghost as the Roman poet Virgil, and feel your hope and faith increase at his sight.
+	
+	No Prompt, Preset
+	
+	+1 Hope
+	+1 Faith
+	
+	
+
+1_5
+Description: 
+Virgil continues to lead Dante, where you do not know.
+	
+	No Prompt, Preset
+	
+	-1 Faith
+
+	
+	
+2_1
+Description: 
+Virgil continues to lead Dante, where you do not know. He is speaking to Dante as they walk, looking up at the stars.
+
+	No Prompt, Random
+	
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Courage
+	Bad: -1 Courage	
+
+
+
+2_2
+Description: 
+You are close enough now to overhear Virgil words. He is describing how he was sent by Dante's true love, Beatrice, to guide Dante through a perilous journey to be rejoined with her in heaven.
+	
+	No Prompt
+	
+	Good: +1 Faith
+	- Overhearing Virgil's words, you feel your faith increasing.
+	Neutral: +1 Faith, -1 Temperance
+	- Overhearing Virgil's words, you feel your faith increasing, but also feel your temperance failing. 
+	Bad: -1 Temperance, -1 Hope
+	- Overhearing Virgil's words, you lose hope and feel your temperance failing.
+
+
+2 ########## Vestibule: 
+
+
+3_1
+Description: 
+You watch as Virgil leads Dante to the entrance to a dark and forboding cave. He gestures forward, and leads Dante onward into the mouth of the cave where they quickly disappear from sight. Above the entrance to cave are incribed the words "Abandon all hope, ye who enter here."
+
+	Good: +1 Faith
+	- Despite the foreboding of the black entrance of the cave, you feel your faith increasing.
+
+	Neutral: +1 Faith, -1 Prudence
+	- Despite the foreboding of the black entrance of the cave, you feel your faith increasing, but a thought nags in your mind that following them into the dark abyss is probably a bad idea. 
+
+	Bad: -1 Prudence
+	- You follow them into the cave, and a thought nags in your mind that following them into the dark abyss is probably a bad idea. 
+
+
+
+3_2
+Description: 
+Upon passing through the gate of Hell you hear anguished screams all around you of the Uncommitted. These are the souls of people who in life took no sides; the opportunists who were for neither good nor evil, but instead were merely concerned with themselves. These souls are forever unclassified; they are neither in Hell nor out of it, but reside on the shores of the river Acheron. Naked and futile, they race around through the mist in eternal pursuit of an elusive, wavering banner (symbolic of their pursuit of ever-shifting self-interest) while relentlessly chased by swarms of wasps and hornets, who continually sting them.
+
+You follow Dante and Virgil and watch as a ferry approaches that will take them across the river Acheron to Hell propper.
+
+	No Prompt
+
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Courage
+	Bad: -1 Courage
+
+
+
+3_3
+Description: 
+You watch as Dante and Virgil speak with the ferryman. After some initial confrontation he allows Dante and Virgil to board the ferry.
+
+	Prompt: You can try to sneak onboard the ferry unoticed, but you risk being discovered. The alternative is to swim.
+		1) Sneak onboard the ferry? 
+		Good: +1 Courage
+		- You manage to sneak aboard the ferry unnoticed and feel your courage increase.
+		Neutral: +1 Courage, -1 Justice
+		- You manage to sneak aboard the ferry unnoticed and feel your courage increase, but you know that doing so was unjust.
+		Bad: -1 Justice
+		- You manage to sneak aboard the ferry unnoticed, but you know that doing so was unjust.
+
+		2) Attempt to swim across.
+		Good: +1 Hope
+		- You manage to swim across the river, and feel your hope increase.
+		Neutral: +1 Hope, -1 Prudence
+		- You manage to swim across the river, and feel your hope increase, but you know that doing so was foolish.
+		Bad: -1 Prudence, -1 Temperance
+		- You manage to swim across the river, but doing so was foolish and you feel your temperance failing.
+
+
+
+
+3 ########## 1st Circle (Limbo)
+
+
+4_1
+Description: 
+You watch from a distance as Dante wakes up to find that he has crossed the Acheron, and Virgil leads him to the first circle of the abyss, Limbo, where Virgil himself resides. You see figures huddled together under a rock. You overhear Virgil explain that they are those who desire without hope.
+
+	No Prompt
+
+	Good: +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+
+
+
+4_2
+Description: 
+You watch as Dante and Virgil encounter a group of philosophers, including Aristotle with Socrates and Plato at his side, as well as other famous ancient philosophers. They are condemned to limbo as are all those who are virtuous yet unsaved. 
+
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Faith
+	Bad: -1 Faith
+
+
+
+4 ########## 2nd Circle (Lust)
+
+5_1
+Description: 
+You follow at a close distance, and watch as Dante and Virgil leave Limbo and enter the Second Circle – the first of the circles of Incontinence – where the punishments of Hell proper begin. They find their way hindered by the serpentine Minos, who judges all of those condemned for active, deliberately willed sin to one of the lower circles. Minos sentences each soul to its torment by wrapping his tail around himself a corresponding number of times. Virgil rebukes Minos, and he and Dante continue on.
+
+	Prompt: Follow Virgil's example and attempt to rebuke Minos?
+
+	1) Yes
+	Good: +1 Courage
+	- Your rebuke succeeds, and you feel your courage increase.
+	Neutral: +1 Courage, -1 Justice
+	- Your rebuke succeeds, and you feel your courage increase, but you know that your action was unjust.
+	Bad: -1 Justice, 
+	- Your rebuke suceeds, but you know your action was unjust
+
+	2) No
+	- You slink around Minos, keeping your distance and manage to remain unseen.
+
+
+
+5_2
+Description: 
+You watch as Virgil shows Dante forward, past a swirling mass of bodies
+	
+	No Prompt
+	
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Faith
+	Bad: -1 Faith
+	
+
+
+5_3
+Description: 
+You see two figures caught in an everlasting embrace. They seem both comforted and in anguish.
+
+	No Prompt
+	
+	Good: +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+	
+
+
+5_4
+Description: 
+You see Virgil and Dante confront to spirits in the throng of contorted emraced bodies. You cannot hear what they say.
+
+	No Prompt
+	
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Prudence
+	Bad: -1 Prudence
+
+
+
+5_5
+Description: 
+You watch as Dante encounters Semiramis, Dido, Cleopatra, Helen of Troy, Paris, Achilles, Tristan, and many others who were overcome by sexual love during their life. 
+
+Dante comes across Francesca da Rimini, who married the deformed Giovanni Malatesta for political purposes but fell in love with his younger brother Paolo Malatesta; the two began to carry on an adulterous affair. They were killed when Giovanni surprised them together in Francesca's bedroom and violently stabbed them both to death.
+
+	No Prompt
+	
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Hope
+	Bad: -1 Hope
+	
+
+
+5_6
+Description: 
+More bodies swirl around you in a contorted fury of lust and anguish. You attempt to hurry past and catch up to Dante and Virgil without being caught in the swirl.
+
+	No Prompt
+
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Charity
+	Bad: -1 Courage
+
+
+
+5 ########## 3rd Circle (Gluttony)
+
+
+6_1
+Description: 
+In the third circle, the gluttonous wallow in a vile, putrid slush produced by a ceaseless, foul, icy rain – a great storm of putrefaction – as punishment for subjecting their reason to a voracious appetite. 
+
+Cerberus, the monstrous three-headed beast of Hell, ravenously guards the gluttons lying in the freezing mire, mauling and flaying them with his claws as they howl like dogs. Virgil obtains safe passage past the monster by filling its three mouths with mud.
+
+	No Prompt
+	
+	Good: +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+	
+	
+
+6_2
+Description: 
+The surrender to sin which began with mutual indulgence leads by an imperceptible degradation to solitary self-indulgence. The gluttons grovel in the mud by themselves, sightless and heedless of their neighbors, symbolizing the cold, selfish, and empty sensuality of their lives. Just as lust has revealed its true nature in the winds of the previous circle, here the slush reveals the true nature of sensuality – which includes not only overindulgence in food and drink, but also other kinds of addiction.
+
+	No Prompt
+
+	Good: +1 Temperance, +1 Courage
+	Neutral: +1 Temperance, -1 Faith
+	Bad: -1 Temperance, 1- Faith
+
+
+
+
+6 ########## 4th Circle (Greed)
+
+7_1
+Description: 
+The Fourth Circle is guarded by a figure whose name is Pluto: the deity of wealth in classical mythology. Pluto menaces Virgil and Dante with the cryptic phrase "Papé Satàn, papé Satàn aleppe", but Virgil protects Dante from him.
+
+	No Prompt
+	
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Faith
+	Bad: -1 Courage
+
+
+
+7_2
+Description: 
+You see before you those whose attitude toward material goods deviated from virtue. They are punished in this the fourth circle of Hell. The damned here include the avaricious or miserly - including many clergymen, and popes and cardinals - who hoarded possessions, and the prodigal, who squandered them. The hoarders and spendthrifts are forced to joust, using as weapons great weights that they push with their chests.
+
+	No Prompt
+	
+	Good: +1 Justice, +1 Courage
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith, -1 Hope
+
+
+7 ########## 5th Circle (Wrath)
+
+7_3
+Description: 
+In the swampy, stinking waters of the river Styx – the Fifth Circle – the actively wrathful fight each other viciously on the surface of the slime, while the sullen lie beneath the water, withdrawn into a black sulkiness which can find no joy in God or man or the universe. 
+
+At the surface of the foul Stygian marsh the active hatreds rend and snarl at one another; at the bottom, the sullen hatreds lie gurgling, unable even to express themselves for the rage that chokes them. 
+
+	No Prompt
+	
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+
+
+
+8_1
+Description: 
+You watch as Dante and Virgil approach Phlegyas, who reluctantly transports them across the Styx in his skiff. 
+
+	No Prompt
+
+	Good: +1 Faith
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+
+
+
+8_2
+Description: 
+Dante shouts at one of the damned souls "In weeping and in grieving, accursed spirit, may you long remain," Virgil blesses him with words used to describe Christ himself. The souls in Hell are eternally fixed in the state they have chosen. Virgil cries out to the souls attempting to grab hold of the skiff: "Away! down there to the other dogs!"
+
+	No Prompt
+
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: -1 Prudence
+
+
+
+8_3
+Description: 
+In the distance, you perceives high towers that resemble fiery red mosques. You overhear Virgil informing Dante that they are approaching the City of Dis. Dis, itself surrounded by the Stygian marsh, contains Lower Hell within its walls. 
+
+You remember that Dis is one of the names of Pluto, the classical king of the underworld, in addition to being the name of the realm. You see that the walls of Dis are guarded by fallen angels. You watch as Virgil attempts toconvince them to let Dante and him enter, but fails.
+
+	No Prompt
+
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Temperance
+	Bad: -1 Temperance
+
+
+
+9_1
+Description: 
+Ahead of you you see Dante is being threatened by the Furies and Medusa. 
+
+	No Prompt 
+
+	Good: +1 Temperance 
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+
+
+
+9_2
+Description: 
+An angel sent from Heaven secures entry for Dante and Virgil, opening the gate by touching it with a wand, and rebukes the fallen angels who opposed them. 
+
+You overhear Virgil mentioning to Dante how Erichtho sent him down to the lowest circle of Hell to bring back a spirit from there.
+
+	No Prompt
+
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+
+
+8 ########## 6th Circle (Heresy)
+
+9_3
+Description: 
+You watch as Dante and Virgil come upon heritics, who are trapped in flamming tombs. Dante speaks with one of the heritics but you cannot hear what he says.
+
+	No Prompt
+
+	Good: +1 Faith
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+
+
+
+10_1
+Description: 
+You have come upon the arch-Heretics, such as Epicurus and his followers (who say "the soul dies with the body") are trapped in flaming tombs.You watch as Dante speaks with a pair of Epicurian Florentines in one of the tombs: a famous leader, and the father of Dante's friend and fellow poet, Guido Cavalcanti. They appear to be discussing Florentine politics. 
+
+In response to a question from Dante about the "prophecy" he has received, one of the damned souls explains that what the souls in Hell know of life on earth comes from seeing the future, not from any observation of the present. Consequently, when the portal of the future has been shut it will no longer be possible for them to know anything.
+
+	No Prompt
+
+	Good: +1 Hope
+	Neutral: +1 Hope, -1 Charity
+	Bad: -1 Charity
+
+
+
+11_1
+Description: 
+Pausing for a moment before the steep descent to the foul-smelling seventh circle, you overhear Virgil explain to Dante the geography and rationale of Lower Hell, in which the sins of violence (or bestiality) and fraud (or malice) are punished.
+
+Virgil asserts that there are only two legitimate sources of wealth: natural resources, and human labor and activity. He explains that usury, to be punished in the next circle, is therefore an offence against both; it is a kind of blasphemy, since it is an act of violence against Art, which is the child of Nature, and Nature derives from God.
+
+	No Prompt
+
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: -1 Prudence
+
+
+
+9 ########## 7th Circle (Violence)
+
+12_1
+Description:
+The Seventh Circle, divided into three rings, houses the Violent. You watch as Dante and Virgil descend a jumble of rocks that had once formed a cliff to reach the Seventh Circle from the Sixth Circle, having first to evade the Minotaur. 
+
+At the sight of them, the Minotaur gnaws his flesh. Virgil assures the monster that Dante is not its hated enemy, Theseus. This causes the Minotaur to charge them as Dante and Virgil swiftly enter the seventh circle. 
+
+Virgil explains the presence of shattered stones around them: they resulted from the great earthquake that shook the earth at the moment of Christ's death, at the time of the Harrowing of Hell. You recall that the ruins resulting from the same shock were previously seen at the beginning of Upper Hell, at the entrance to the second circle.
+
+	No Prompt
+
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Courage
+	Bad: -1 Courage
+
+
+
+12_2
+Description:
+In the first round of the seventh circle, the murderers, war-makers, plunderers, and tyrants are immersed in Phlegethon, a river of boiling blood and fire. As they wallowed in blood during their lives, so they are immersed in the boiling blood forever, each according to the degree of his guilt.
+
+
+
+	No Prompt
+
+	Good: +1 Courage 
+	Neutral: +1 Courage, -1 Temperance
+	Bad: -1 Temperance
+
+
+
+12_3
+Description:
+The Centaurs, commanded by Chiron and Pholus, patrol the ring, shooting arrows into any sinners who emerge higher out of the boiling blood than each is allowed. The centaur Nessus guides the poets along Phlegethon and points out Alexander the Great, among other tyrants. 
+
+The river grows shallower until it reaches a ford, after which it comes full circle back to the deeper part where Dante and Virgil first approached it. After bringing Dante and Virgil to the shallow ford, Nessus leaves them to return to his post.
+
+	No Prompt
+
+	Good:  +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+
+
+
+13_1
+Description:
+The second round of the seventh circle is the Wood of the Suicides, in which the souls of the people who attempted or committed suicide are transformed into gnarled, thorny trees and then fed upon by Harpies, hideous clawed birds with the faces of women; the trees are only permitted to speak when broken and bleeding. 
+
+Dante breaks a twig off one of the trees and from the bleeding trunk hears the tale of one of the damned who, when living, fell out of favor with the king and was imprisoned, blinded, and subsequently committed suicide. 
+
+
+	No Prompt
+
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+	
+	
+
+13_2
+Description:
+Here, the shades are deprived of even the semblance of the human form. As they refused life, they remain fixed in a dead and withered sterility. They are the image of the self-hatred which dries up the very sap of energy and makes all life infertile.
+
+
+	No Prompt
+
+	Good: +1 Faith
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+	
+	
+
+13_3
+Description:
+You overhear as Dante learns that these suicides, unique among the dead, will not be corporally resurrected after the Final Judgement since they threw their bodies away; instead, they will maintain their bushy form, with their own corpses hanging from the thorny limbs.
+
+	No Prompt
+
+	Good: +1 Hope 
+	Neutral: +1 Hope, -1 Charity
+	Bad: -1 Charity
+
+
+
+14_1
+Description:
+The third round of the seventh circle is a great Plain of Burning Sand scorched by great flakes of flame falling slowly down from the sky. 
+
+The Blasphemers (the Violent against God) are stretched supine upon the burning sand, the Sodomites (the Violent against Nature) run in circles, while the Usurers (the Violent against Art) crouch huddled and weeping. 
+
+Dante finds Capaneus stretched out on the sands; for blasphemy against Jove, he was struck down with a thunderbolt during the Siege of Thebes; he is still scorning Jove in the afterlife. The overflow of Phlegethon, the river of blood from the First Round, flows boiling through the Wood of the Suicides (the second round) and crosses the Burning Plain. Virgil explains the origin of the rivers of Hell, which includes references to the Old Man of Crete.
+
+	No Prompt
+
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: -1 Prudence
+
+
+
+15_1
+Description:
+Protected by the powers of the boiling rivulet, Dante and Virgil progress across the burning plain. They pass a roving group of Sodomites, and Dante, to his surprise, recognizes Brunetto Latini. Dante addresses Brunetto with deep and sorrowful affection, paying him the highest tribute offered to any sinner in the Inferno. 
+
+	No Prompt
+
+	Good: +1 Prudence 
+	Neutral: +1Prudence, -1 Courage
+	Bad: -1 Courage
+
+
+
+17_1
+Description: 
+The Poets begin to hear the waterfall that plunges over the Great Cliff into the Eighth Circle. At the top of the falls, at Virgil's order, Dante removes a cord from about his waist and Virgil drops it over the edge; as if in answer, a large, distorted shape swims up through the filthy air of the abyss.
+
+The creature is Geryon, the Monster of Fraud; Virgil announces that they must fly down from the cliff on the monster's back. Dante goes alone to examine the Usurers: he does not recognize them, but each has a heraldic device emblazoned on a leather purse around his neck.
+
+
+
+	No Prompt
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Temperance
+	Bad: -1 Temperance
+
+
+
+17_2
+Description:
+Dante rejoins Virgil and, both mounted atop Geryon's back, the two begin their descent from the great cliff in the Eighth Circle: the Hell of the Fraudulent and Malicious.
+
+	No Prompt
+	Good: +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+
+
+
+10 ########## 8th Circle (Fraud)
+
+
+18_1
+Description:
+You watch as up ahead Dante now finds himself in the Eighth Circle, called Malebolge ("Evil ditches"): the upper half of the Hell of the Fraudulent and Malicious. 
+
+The Eighth Circle is a large funnel of stone shaped like an amphitheatre around which run a series of ten deep, narrow, concentric ditches or trenches called bolge. Within these ditches are punished those guilty of Simple Fraud. 
+
+From the foot of the Great Cliff to the Well (which forms the neck of the funnel) are large spurs of rock, like umbrella ribs or spokes, which serve as bridges over the ten ditches.
+
+	No Prompt
+
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+	
+	
+
+18_2
+Description:
+The panderers and seducersmake two files, one along either bank of the ditch, and march quickly in opposite directions while being whipped by horned demons for eternity. They deliberately exploited the passions of others and so drove them to serve their own interests, are themselves driven and scourged"
+
+In the group of seducers, Virgil points out Jason, the Greek hero who led the Argonauts to fetch the Golden Fleece from Aeëtes, King of Colchis. He gained the help of the king's daughter, Medea, by seducing and marrying her only to later desert her for Creusa. Jason had previously seduced Hypsipyle when the Argonauts landed at Lemnos on their way to Colchis, but abandoned her, alone and pregnant.
+
+	No Prompt
+
+	Good: +1 Faith 
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+
+
+
+18_3
+Description:
+You see before you the flatterers. These also exploited other people, this time abusing and corrupting language to play upon others' desires and fears. They are steeped in excrement - representative of the false flatteries they told on earth - as they howl and fight amongst themselves.
+
+	No Prompt
+
+	Good: +1 Hope 
+	Neutral: +1 Hope, -1 Charity
+	Bad: -1 Charity
+
+
+
+19_1
+Description:
+You hear as Dante now forcefully expresses his condemnation of those who committed simony, or the sale of ecclesiastic favors and offices, and therefore made money for themselves out of what belongs to God. He shouts at the damned souls, 
+
+"Rapacious ones, who take the things of God, that ought to be the brides of Righteousness, and make them fornicate for gold and silver! The time has come to let the trumpet sound for you."
+
+The sinners are placed head-downwards in round, tube-like holes within the rock (debased mockeries of baptismal fonts), with flames burning the soles of their feet. The heat of the fire is proportioned to their guilt.
+
+	No Prompt
+
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: -1 Prudence
+
+
+
+20_1
+Description:
+You watch as Dante looks down at the souls of fortune tellers, diviners, astrologers, and other false prophets. The punishment of those who attempted to usurp God's prerogative by prying into the future, is to have their heads twisted around on their bodies; in this horrible contortion of the human form, these sinners are compelled to walk backwards for eternity, blinded by their own tears. 
+
+Thus, those who sought to penetrate the future cannot even see in front of themselves; they attempted to move themselves forward in time, so must they go backwards through all eternity; and as the arts of sorcery are a distortion of God's law, so are their bodies distorted in Hell.
+
+Dante weeps in pity, and Virgil rebukes him, saying, "Here pity only lives when it is dead; for who can be more impious than he who links God's judgment to passivity?"
+
+	No Prompt
+
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Courage
+	Bad: -1 Courage
+
+
+
+21_1
+Description:
+Corrupt politicians, who made money by trafficking in public offices, are immersed in a lake of boiling pitch, which represents the sticky fingers and dark secrets of their corrupt deals. They are guarded by demons called the Malebranche, who tear them to pieces with claws and grappling hooks if they catch them above the surface of the pitch. 
+
+	No Prompt
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Temperance
+	Bad: -1 Temperance
+	
+	
+
+21_2
+Description:
+The Poets observe a demon arrive with a grafting Senator of Lucca and throw him into the pitch where the demons set upon him. Virgil secures safe-conduct from the leader of the Malebranche. He informs them that the bridge ahead is shattered as a result of the earthquake that shook Hell at the death of Christ, but that there is another bridge further on. He sends a squad of demons led by Barbariccia to escort them safely.
+
+	No Prompt
+
+	Good: +1 Temperance 
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+
+
+22_1
+Description:
+One of the grafters is seized by the demons, and Virgil questions him. The sinner speaks of his fellow grafters, and offers to lure some of his fellow sufferers into the hands of the demons. 
+
+
+	No Prompt
+	
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+
+
+
+22_2
+Description:
+When his plan is accepted he escapes back into the pitch. A brawl starts in mid-air and the two brawlers fall into the pitch themselves. You watch as Dante and Virgil take advantage of the confusion to slip away.
+
+	No Prompt
+	
+	Good: +1 Faith
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+
+
+
+23_1
+Description:
+The Poets escape the pursuing Malebranche by sliding down the sloping bank of the next pit. 
+
+	No Prompt
+
+	Good: +1 Hope
+	Neutral: +1 Hope, -1 Charity
+	Bad: -1 Charity
+
+
+
+23_2
+Description:
+Here you find the hypocrites listlessly walking around a narrow track for eternity, weighted down by leaden robes. The robes are brilliantly gilded on the outside and are shaped like a monk's habit – the hypocrite's outward appearance shines brightly and passes for holiness, but under that show lies the terrible weight of his deceit, a falsity that weighs them down and makes spiritual progress impossible for them.
+
+	No Prompt
+	
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: -1 Prudence
+
+
+
+23_3
+Description:
+Dante speaks with two Bolognese brothers of the Jovial Friars, an order that had acquired a reputation for not living up to its vows and was eventually disbanded by Papal decree. One of the Friars points out the High Priest of Israel under Pontius Pilate, who counseled the Pharisees to crucify Jesus for the public good. He himself is crucified to the floor of Hell by three large stakes, and in such a position that every passing sinner must walk upon him: he must suffer upon his body the weight of all the world's hypocrisy". 
+
+The Jovial Friars explain to Virgil how he may climb from the pit; Virgil discovers that Malacoda lied to him about the bridges over the Sixth Bolgia.
+
+	No Prompt
+	
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Courage
+	Bad: -1 Courage
+
+
+
+24_1
+Description:
+Dante and Virgil leave the bolgia of the Hypocrites by climbing the ruined rocks of a bridge destroyed by the great earthquake, after which they cross the bridge of the Seventh Bolgia to the far side to observe the next chasm. The pit is filled with monstrous reptiles: the shades of thieves are pursued and bitten by snakes and lizards, who curl themselves about the sinners and bind their hands behind their backs. 
+
+The full horror of the thieves' punishment is revealed gradually: just as they stole other people's substance in life, their very identity becomes subject to theft here.[87] One sinner, who reluctantly identifies himself as Vanni Fucci, is bitten by a serpent at the jugular vein, bursts into flames, and is re-formed from the ashes like a phoenix. Vanni tells a dark prophecy against Dante.
+
+	No Prompt
+
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Temperance
+	Bad: -1 Temperance
+
+
+
+25_1
+Description:
+Vanni hurls an obscenity at God and the serpents swarm over him. The centaur Cacus arrives to punish the wretch; he has a fire-breathing dragon on his shoulders and snakes covering his equine back. 
+
+Dante then meets five noble thieves of Florence and observes their various transformations. One in human form is merged with a six-legged serpent. Another figure first appears as a man, but exchanges forms and bites at another in the form of a four-footed serpent. 
+
+	No Prompt
+
+	Good: +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+
+
+
+26_1
+Description:
+Here, you watch as Dante and Virgil observe fraudulent advisers or evil counsellors move about, hidden from view inside individual flames. These are not people who gave false advice, but people who used their position to advise others to engage in fraud. 
+
+Ulysses and Diomedes are punished together within a great double-headed flame; they are condemned for the stratagem of the Trojan Horse - resulting in the Fall of Troy - for persuading Achilles to sail for Troy, and for the theft of the sacred statue of Pallas, the Palladium upon which the fate of Troy depended. 
+
+Ulysses narrates the tale of his last voyage and death. He tells how, after his detainment by Circe, his love for neither his son, his father, nor his wife could overpower his desire to set out on the open sea to "gain experience of the world and of the vices and the worth of men".
+
+	No Prompt
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+
+
+
+28_1
+Description:
+In the Ninth Bolgia, the Sowers of Discord are hacked and mutilated for all eternity by a large demon wielding a bloody sword; their bodies are divided as, in life, their sin was to tear apart what God had intended to be united; these are the sinners who are ready to rip up the whole fabric of society to gratify a sectional egotism. 
+
+	No Prompt
+	
+	Good: +1 Faith
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+
+
+
+28_2
+Description:
+The souls must drag their ruined bodies around the ditch, their wounds healing in the course of the circuit, only to have the demon tear them apart anew. These are divided into three categories: (i) religious schism and discord, (ii) civil strife and political discord, and (iii) family disunion, or discord between kinsmen. Chief among the first category is Muhammad, the founder of Islam: his body is ripped from groin to chin, with his entrails hanging out. Here also is Muhammad's son-in-law, Ali, who caused the schism between Sunni and Shiite: his face is cleft from top to bottom. 
+
+In the second catergory there is a damned soul with his throat slit, nose slashed off as far as the eyebrows, and a wound where one of his ears had been. The Roman tribune Gaius Scribonius Curio who advised Caesar to cross the Rubicon and thus begin the Civil War, is here with his tongue cut off. 
+
+	No Prompt
+
+	Good: +1 Hope
+	Neutral: +1 Hope, -1 Charity
+	Bad: -1 Charity
+	
+	
+
+28_3
+Description:
+Finally, you come upon the third category of sinner of fraud. Dante sees Bertrand de Born. The knight carries around his severed head by its own hair, swinging it like a lantern. Bertrand is said to have caused a quarrel between Henry II of England and his son Prince Henry the Young King; his punishment in Hell is decapitation, since dividing father and son is like severing the head from the body.
+
+	No Prompt
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: -1 Prudence
+
+
+
+29_1
+Description:
+The final bolgia of the Eighth Circle, is home to various sorts of falsifiers. 
+
+	No Prompt
+
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Courage
+	Bad: -1 Courage
+	
+	
+
+29_2
+Description:
+Some falsifiers here lie prostrate while others run hungering through the pit, tearing others to pieces. You watch as Dante speaks with two spirits viciously scrubbing and clawing at their leprous scabs.
+
+	No Prompt
+
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Temperance
+	Bad: -1 Temperance
+	
+	
+
+29_3
+Description:
+Falsifiers, A disease on society, they are themselves afflicted with different types of afflictions: horrible diseases, stench, thirst, filth, darkness, and screaming. 
+
+	No Prompt
+
+	Good: +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+	
+	
+
+30_1
+Description:
+Suddenly, two spirits – Gianni Schicchi de' Cavalcanti and Myrrha, both punished as Imposters (Falsifiers of Persons) – run rabid through the pit. Schicchi sinks his tusks into Capocchio's neck and drags him away like prey. Griffolino explains how Myrrha disguised herself to commit incest with her father King Cinyras, while Schicchi impersonated the dead Buoso Donati to dictate a will giving himself several profitable bequests. 
+
+Dante then encounters a damned soul that was a counterfeiter. He is punished by a loathsome dropsy-like disease, which gives him a bloated stomach, prevents him from moving, and an eternal, unbearable thirst.
+
+	No Prompt
+
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+	
+	
+
+30_2
+Description:
+Master Adam points out two sinners of the fourth class, the Perjurers. These are Potiphar's wife (punished for her false accusation of Joseph, and Sinon, the Achaean spy who lied to the Trojans to convince them to take the Trojan Horse into their city; Sinon is here because his advice was false as well as evil. Both suffer from a burning fever. 
+
+Master Adam and Sinon exchange abuse, which Dante watches until he is rebuked by Virgil. As a result of his shame and repentance, Dante is forgiven by his guide. 
+
+	No Prompt
+
+	Good: +1 Faith
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+	
+	
+
+31_1
+Description:
+Dante and Virgil approach the Central Well, at the bottom of which lies the Ninth and final Circle of Hell. The classical and biblical Giants – who perhaps symbolize pride and other spiritual flaws lying behind acts of treachery – stand perpetual guard inside the well-pit, their legs embedded in the banks of the Ninth Circle while their upper halves rise above the rim and can be visible from the Malebolge.
+
+	No Prompt
+
+	Good: +1 Hope
+	Neutral: +1 Hope, -1 Charity
+	Bad: -1 Charity
+	
+	
+
+31_2
+Description:
+Dante initially mistakes them for great towers of a city. Among the Giants, Virgil identifies Nimrod (who tried to build the Tower of Babel; he shouts out the unintelligible Raphèl mai amècche zabì almi); Ephialtes (who with his brother Otus tried to storm Olympus during the Gigantomachy; he has his arms chained up) and Briareus (who Dante claimed to have challenged the Gods); and Tityos and Typhon, who insulted Jupiter. Also here is the Giant Antaeus, who did not join in the rebellion against the Olympian Gods and therefore is not chained. 
+
+	No Prompt
+
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: -1 Prudence
+	
+	
+
+31_3
+Description:
+At Virgil's persuasion, Antaeus takes the Poets in his large palm and lowers them gently to the final level of Hell.
+
+	No Prompt
+
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Courage
+	Bad: -1 Courage
+
+
+
+11 ########## 9th Circle (Treachery)
+
+32_1
+Description:
+At the base of the well, Dante finds himself within a large frozen lake: Cocytus, the Ninth Circle of Hell. Trapped in the ice, each according to his guilt, are punished sinners guilty of treachery against those with whom they had special relationships. The lake of ice is divided into four concentric rings (or "rounds") of traitors corresponding, in order of seriousness, to betrayal of family ties, betrayal of community ties, betrayal of guests, and betrayal of lords. This is in contrast to the popular image of Hell as fiery; as Ciardi writes, "The treacheries of these souls were denials of love (which is God) and of all human warmth. Only the remorseless dead center of the ice will serve to express their natures. As they denied God's love, so are they furthest removed from the light and warmth of His Sun. As they denied all human ties, so are they bound only by the unyielding ice." 
+
+This final, deepest level of hell is reserved for traitors, betrayers and oathbreakers.
+
+	No Prompt
+
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Temperance
+	Bad: -1 Temperance
+	
+	
+
+32_2
+Description:
+ This round is named after Cain, who killed his own brother in the first act of murder. This round houses the Traitors to their Kindred: they have their necks and heads out of the ice and are allowed to bow their heads, allowing some protection from the freezing wind.
+
+	No Prompt
+
+	Good: +1 Temperance
+	Neutral: +1 Temperance, -1 Justice
+	Bad: -1 Justice
+	
+	
+
+32_3
+Description:
+Here lie the Traitors to their Country: those who committed treason against political entities (parties, cities, or countries) have their heads above the ice, but they cannot bend their necks. Dante accidentally kicks the head of one of these damned souls, and then proceeds to treat him more savagely than any other soul he has thus far met. 
+
+The Poets then see two heads frozen in one hole, one gnawing the nape of the other's neck.
+
+	No Prompt
+
+	Good: +1 Justice
+	Neutral: +1 Justice, -1 Faith
+	Bad: -1 Faith
+
+
+
+33_1
+Description:
+The gnawing sinner tells his story: he is Count Ugolino, and the head he gnaws belongs to Archbishop Ruggieri. Ugolino describes how he conspired with Ruggieri to oust his nephew and take control over the Guelphs of Pisa. However, as soon as his nephew was gone, the Archbishop, sensing the Guelphs' weakened position, turned on Ugolino and imprisoned him with his sons and grandsons in the Torre dei Gualandi. In March 1289, the Archbishop condemned the prisoners to death by starvation in the tower.
+	
+	No Prompt
+
+	Good: +1 Faith
+	Neutral: +1 Faith, -1 Hope
+	Bad: -1 Hope
+
+33_2
+Description:
+The third region of Cocytus is named after Ptolemy, who invited his father-in-law Simon Maccabaeus and his sons to a banquet and then killed them. Traitors to their Guests lie supine in the ice while their tears freeze in their eye sockets, sealing them with small visors of crystal – even the comfort of weeping is denied them. 
+
+
+	No Prompt
+
+	Good: +1 Hope
+	Neutral: +1 Hope, -1 Charity
+	Bad: -1 Charity
+
+33_3
+Description:
+Dante encounters Fra Alberigo, one of the Jovial Friars and a native of Faenza, who asks Dante to remove the visor of ice from his eyes. In 1285, Alberigo invited his opponents, Manfred (his brother) and Alberghetto (Manfred's son), to a banquet at which his men murdered the dinner guests. He explains that often a living person's soul falls to Ptolomea before he dies ("before dark Atropos has cut their thread"). Then, on earth, a demon inhabits the body until the body's natural death. Fra Alberigo's sin is identical in kind to that of Branca d'Oria, a Genoese Ghibelline who, in 1275, invited his father-in-law, Michel Zanche, and had him cut to pieces. Branca did not die until 1325, but his soul, together with that of his nephew who assisted in his treachery, fell to Ptolomaea before Michel Zanche's soul arrived at the bolgia of the Barrators. 
+
+Dante leaves without keeping his promise to clear Fra Alberigo's eyes of ice.
+
+The fourth division of Cocytus, named for Judas Iscariot, contains the Traitors to their Lords and benefactors. Upon entry into this round, Virgil says "Vexilla regis prodeunt inferni"  - "The banners of the King of Hell draw closer." 
+
+Judecca is completely silent: all of the sinners are fully encapsulated in ice, distorted and twisted in every conceivable position. The sinners present an image of utter immobility: it is impossible to talk with any of them, so Dante and Virgil quickly move on to the centre of Hell.
+
+	No Prompt
+
+	Good: +1 Charity
+	Neutral: +1 Charity, -1 Prudence
+	Bad: +1 Prudence
+
+
+
+12 ########## Centre of Hell
+
+
+34_1
+Description:
+In the very centre of Hell, condemned for committing the ultimate sin - personal treachery against God - is the Devil. The arch-traitor, Lucifer was once held by God to be fairest of the angels before his pride led him to rebel against God, resulting in his expulsion from Heaven. Lucifer is a giant, terrifying beast trapped waist-deep in the ice, fixed and suffering. He has three faces, each a different color: one red (the middle), one a pale yellow (the right), and one black (the left):
+
+... he had three faces: one in front bloodred;
+and then another two that, just above
+  the midpoint of each shoulder, joined the first;
+  and at the crown, all three were reattached;
+the right looked somewhat yellow, somewhat white;
+  the left in its appearance was like those
+  who come from where the Nile, descending, flows.[104]
+
+Satan is impotent, ignorant, and full of hate. Lucifer has six wings, but these are now dark, bat-like, and futile: the icy wind that emanates from the beating of Lucifer's wings only further ensures his own imprisonment in the frozen lake. He weeps from his six eyes, and his tears mix with bloody froth and pus as they pour down his three chins. Each face has a mouth that chews eternally on a prominent traitor. 
+
+Marcus Junius Brutus and Gaius Cassius Longinus dangle with their feet in the left and right mouths, respectively, for their involvement in the assassination of Julius Caesar.
+
+In the central, most vicious mouth is Judas Iscariot, the apostle who betrayed Christ. Judas is receiving the most horrifying torture of the three traitors: his head is gnawed inside Lucifer's mouth while his back is forever flayed and shredded by Lucifer's claws.
+
+	No Prompt
+
+	Good: +1 Prudence
+	Neutral: +1 Prudence, -1 Courage
+	Bad: -1 Courage
+	
+	
+
+34_2
+Description:
+Virgil and Dante begin their escape from Hell by clambering down Satan's ragged fur, feet-first. When they reach Satan's genitalia, the poets pass through the center of the universe and of gravity from the Northern Hemisphere of land to the Southern Hemisphere of water. When Virgil changes direction and begins to climb "upward" towards the surface of the Earth at the antipodes, Dante, in his confusion, initially believes they are returning to Hell.
+
+	No Prompt
+
+	Good: +1 Courage
+	Neutral: +1 Courage, -1 Temperance
+	Bad: +1 Temperance
+	
+	
+
+34_3
+Description:
+Virgil explains how the Southern Hemisphere was once covered with dry land, but the land recoiled in horror to the north when Lucifer fell from Heaven and was replaced by the ocean. Meanwhile, the inner rock Lucifer displaced as he plunged into the center of the earth rushed upwards to the surface of the Southern Hemisphere to avoid contact with him, forming the Mountain of Purgatory. 
+
+This mountain – the only land mass in the waters of the Southern Hemisphere – rises above the surface at a point directly opposite Jerusalem. 
+
+The poets then ascend a narrow chasm of rock through the space contained between the floor formed by the convex side of Cocytus and the underside of the earth above, moving in opposition to Lethe, the river of oblivion, which flows down from the summit of Mount Purgatory. 
+
+The poets finally emerge a little before dawn on the morning of Easter Sunday, beneath a sky studded with stars.
+
+
+THE END!!!
+
+
+
