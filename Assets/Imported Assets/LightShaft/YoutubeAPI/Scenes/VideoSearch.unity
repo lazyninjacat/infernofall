@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &5
@@ -109,6 +110,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    debug:
+      m_Flags: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &8629626
 GameObject:
@@ -3777,54 +3780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 738012399774d8e4abbfad08f1fc1b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  headerElementInfo:
-  - text: Name
-    dataType: 0
-    formatString: 
-    preferredWidth: 150
-    horizontalAlignment: 0
-  - text: Description
-    dataType: 0
-    formatString: 
-    preferredWidth: 300
-    horizontalAlignment: 0
-  - text: Type
-    dataType: 0
-    formatString: 
-    preferredWidth: 100
-    horizontalAlignment: 0
-  - text: Start Date
-    dataType: 5
-    formatString: 
-    preferredWidth: 200
-    horizontalAlignment: 1
-  - text: End Date
-    dataType: 5
-    formatString: 
-    preferredWidth: 200
-    horizontalAlignment: 1
-  - text: Location
-    dataType: 0
-    formatString: 
-    preferredWidth: 300
-    horizontalAlignment: 0
-  rowHeight: 26
-  unselectedColor:
-    r: 1
-    g: 1
-    b: 1
-    a: 0.7254902
-  selectedColor:
-    r: 0.5921569
-    g: 0.5921569
-    b: 0.5921569
-    a: 0.7254902
-  listSelection: 0
-  HeaderElementPrefab: {fileID: 153952, guid: 9b393a28695f55d4d834d338a3dbe835, type: 2}
-  RowPrefab: {fileID: 170522, guid: 9c10508209c866c47839cf59f6de476c, type: 2}
-  RowElementPrefab: {fileID: 163306, guid: 6d96f8f2788cb904cb6a3bb79041bf5a, type: 2}
-  shiftDown: 0
-  shiftDownSelections: 
 --- !u!114 &835622881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4174,8 +4129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f2831ee734c7a4cb2c38a367a273d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 0
-  rowElements: []
 --- !u!114 &865271124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5229,6 +5182,7 @@ VideoPlayer:
   m_Enabled: 1
   m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0
@@ -5862,7 +5816,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1291117356}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -7102,11 +7056,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!4 &1560956543
 Transform:
   m_ObjectHideFlags: 0
@@ -9569,47 +9523,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   youtubeUrl: 
+  videoQuality: 0
+  customPlaylist: 0
+  autoPlayNextVideo: 0
+  youtubeUrls: []
   startFromSecond: 0
   startFromSecondTime: 0
   autoPlayOnStart: 0
+  videoFormat: 0
   autoPlayOnEnable: 0
   playUsingInternalDevicePlayer: 0
   loadYoutubeUrlsOnly: 0
+  objectsToRenderTheVideoImage: []
   is3DLayoutVideo: 0
   layout3d: 0
   videoControllerCanvas: {fileID: 1888131191}
   mainCamera: {fileID: 1560956542}
-  videoQuality: 0
   loadingContent: {fileID: 1291117356}
   OnYoutubeUrlAreReady:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnVideoReadyToStart:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnVideoStarted:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnVideoPaused:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   OnVideoFinished:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  objectsToRenderTheVideoImage: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   videoPlayer: {fileID: 2139121076}
   audioPlayer: {fileID: 1088466353}
   debug: 0
+  _skipOnDrop: 1
   videoUrl: 
   audioUrl: 
   ForceGetWebServer: 0
@@ -9632,6 +9591,8 @@ MonoBehaviour:
   decryptedAudioUrlResult: 
   EncryptUrlForVideo: 
   EncryptUrlForAudio: 
+  jsonForHtmlVersion: 
+  checkIfSync: 0
 --- !u!82 &2139121075
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9723,6 +9684,7 @@ VideoPlayer:
   m_Enabled: 1
   m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
   m_TargetTexture: {fileID: 0}
   m_TimeReference: 0

@@ -29,6 +29,19 @@ public class YoutubePlayer : MonoBehaviour
         UHD1440,
         UHD2160
     }
+
+    public enum VideoFormatType
+    {
+        MP4,
+        WEBM
+    }
+
+    public enum PlayerType
+    {
+        simple,
+        advanced
+    }
+
     #endregion
 
     #region PUBLIC VARIABLES
@@ -36,7 +49,23 @@ public class YoutubePlayer : MonoBehaviour
     [Tooltip("You can put urls that start at a specific time example: 'https://youtu.be/1G1nCxxQMnA?t=67'")]
     public string youtubeUrl;
 
+    [Space]
+    [Space]
+    [Tooltip("The desired video quality you want to play. It's in experimental mod, because we need to use 2 video players in qualities 720+, you can expect some desync, but we are working to find a definitive solution to that. Thanks to DASH format.")]
+    public YoutubeVideoQuality videoQuality;
 
+    [Space]
+    public bool customPlaylist = false;
+    [DrawIf("customPlaylist", true)]
+    public bool autoPlayNextVideo;
+
+    [Header("If is a custom playlist put urls here")]
+    public string[] youtubeUrls;
+
+    private int currentUrlIndex = 0;
+
+    [Space]
+    [Header("Playback Options")]
     [Space]
     [Tooltip("Start playing the video from a desired time")]
     public bool startFromSecond = false;
@@ -47,21 +76,31 @@ public class YoutubePlayer : MonoBehaviour
     [Tooltip("Play the video when the script initialize")]
     public bool autoPlayOnStart = true;
 
+    [Header("For Mobiles Leave MP4 ")]
+    public VideoFormatType videoFormat;
+
     [Space]
     [Tooltip("Play or continue when OnEnable is called")]
     public bool autoPlayOnEnable = false;
 
     [Space]
+    [Header("Use Device Video player (Standard quality only)")]
     [Tooltip("Play video in mobiles using the mobile device video player not unity internal player")]
     public bool playUsingInternalDevicePlayer = false;
 
     [Space]
-    [Header("If you enable this you can ignore the bellow settings")]
+    [Header("Only load the url to use in a custom player.")]
     [Space]
     [Tooltip("If you want to use your custom player, you can enable this and set the callback OnYoutubeUrlLoaded and get the public variables audioUrl or videoUrl of that script.")]
     public bool loadYoutubeUrlsOnly = false;
 
     [Space]
+    [Header("Render the same video to more objects")]
+    [Tooltip("Render the same video player material to a different materials, if you want")]
+    public GameObject[] objectsToRenderTheVideoImage;
+
+    [Space]
+    [Header("Option for 3D video Only.")]
     [Tooltip("If the video is a 3D video sidebyside or Over/Under")]
     public bool is3DLayoutVideo = false;
 
@@ -81,10 +120,7 @@ public class YoutubePlayer : MonoBehaviour
     [Space]
     public Camera mainCamera;
 
-    [Space]
-    [Header("This option is in experimental mode.")]
-    [Tooltip("The desired video quality you want to play. It's in experimental mod, because we need to use 2 video players in qualities 720+, you can expect some desync, but we are working to find a definitive solution to that. Thanks to DASH format.")]
-    public YoutubeVideoQuality videoQuality;
+    
 
     [Space]
     [Header("Loading Settings")]
@@ -104,10 +140,7 @@ public class YoutubePlayer : MonoBehaviour
     [Tooltip("When the video finish")]
     public UnityEvent OnVideoFinished;
 
-    [Space]
-    [Header("Render the same video to more objects")]
-    [Tooltip("Render the same video player material to a different materials, if you want")]
-    public GameObject[] objectsToRenderTheVideoImage;
+    
 
     [Space]
     [Header("The unity video players")]
@@ -121,6 +154,11 @@ public class YoutubePlayer : MonoBehaviour
     [Tooltip("Show the output in the console")]
     public bool debug;
 
+    [Space]
+    [SerializeField]
+    [Header("If the video stucks you can try to disable this.")]
+    private bool _skipOnDrop = true;
+
 
     //Youtube formated urls
     [HideInInspector]
@@ -128,10 +166,11 @@ public class YoutubePlayer : MonoBehaviour
     [HideInInspector]
     public string audioUrl;
 
-    [Space]
+    [HideInInspector] //deprecated.
     public bool ForceGetWebServer = false;
 
     [Space]
+    [Header("Screen Controls")]
     [Tooltip("Show the video controller in screen [slider with progress, video time, play pause, etc...]")]
     public bool showPlayerControls = false;
 
@@ -193,8 +232,9 @@ public class YoutubePlayer : MonoBehaviour
         {
             if (videoQuality == YoutubeVideoQuality.STANDARD) //Disable the second video player to eco resource;
             {
-                videoPlayer.skipOnDrop = true;
-                audioPlayer.transform.gameObject.SetActive(false);
+                videoPlayer.skipOnDrop = _skipOnDrop;
+                if(audioPlayer != null)
+                    audioPlayer.transform.gameObject.SetActive(false);
             }
 
             //Check if fullscreen Mode is active at start.
@@ -207,7 +247,6 @@ public class YoutubePlayer : MonoBehaviour
 
     public void Start()
     {
-
         if (playUsingInternalDevicePlayer)
             loadYoutubeUrlsOnly = true;
 
@@ -219,8 +258,11 @@ public class YoutubePlayer : MonoBehaviour
             Skybox3DSettup();
 
             //I used this in version 5.1 but some users don't like, you may enable if you want to test, this prevent the video to be out of sync sometimes, but there's a lot of lag in playback
-            //videoPlayer.skipOnDrop = true;
-            //audioPlayer.skipOnDrop = true;
+            if (videoFormat == VideoFormatType.WEBM)
+            {
+                videoPlayer.skipOnDrop = _skipOnDrop;
+                audioPlayer.skipOnDrop = _skipOnDrop;
+            }
 
             audioPlayer.seekCompleted += AudioSeeked;
             videoPlayer.seekCompleted += VideoSeeked;
@@ -240,8 +282,14 @@ public class YoutubePlayer : MonoBehaviour
 
         if (autoPlayOnStart)
         {
-
-            PlayYoutubeVideo(youtubeUrl);
+            if (customPlaylist)
+            {
+                PlayYoutubeVideo(youtubeUrls[currentUrlIndex]);
+            }
+            else
+            {
+                PlayYoutubeVideo(youtubeUrl);
+            }
         }
 
         //VideoController Area
@@ -250,6 +298,23 @@ public class YoutubePlayer : MonoBehaviour
         else
             lowRes = false;
 
+    }
+
+    public void CallNextUrl()
+    {
+        if (!customPlaylist)
+            return;
+        if((currentUrlIndex + 1) < youtubeUrls.Length)
+        {
+            currentUrlIndex++;
+        }
+        else
+        {
+            //reset
+            currentUrlIndex = 0;
+        }
+
+        PlayYoutubeVideo(youtubeUrls[currentUrlIndex]);
     }
 
     private void TryToLoadThumbnailBeforeOpenVideo(string id)
@@ -314,8 +379,8 @@ public class YoutubePlayer : MonoBehaviour
 
         }
 
-
-        videoControllerCanvas.GetComponent<Canvas>().worldCamera = mainCamera;
+        if(videoControllerCanvas != null)
+            videoControllerCanvas.GetComponent<Canvas>().worldCamera = mainCamera;
         if (videoPlayer.renderMode == VideoRenderMode.CameraFarPlane || videoPlayer.renderMode == VideoRenderMode.CameraNearPlane)
             videoPlayer.targetCamera = mainCamera;
     }
@@ -367,14 +432,7 @@ public class YoutubePlayer : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (youtubeUrlReady && videoPlayer.isPrepared)
         {
-            if (videoQuality == YoutubeVideoQuality.STANDARD)
-                videoPlayer.Play();
-            else
-            {
-                if (!noAudioAtacched)
-                    audioPlayer.Play();
-                videoPlayer.Play();
-            }
+            Play();
         }
         else
         {
@@ -389,23 +447,87 @@ public class YoutubePlayer : MonoBehaviour
 
     void VerifyFrames()
     {
-        if (videoPlayer.isPlaying)
+        if (!playUsingInternalDevicePlayer)
         {
-            if (lastFrame == videoPlayer.frame)
+            if (videoPlayer.isPlaying)
             {
-                audioPlayer.Pause();
-                videoPlayer.Pause();
-                StartCoroutine(WaitSync());
+                if (lastFrame == videoPlayer.frame)
+                {
+                    audioPlayer.Pause();
+                    videoPlayer.Pause();
+                    StartCoroutine(WaitSync());
+                }
+                lastFrame = videoPlayer.frame;
+                Invoke("VerifyFrames", 2);
             }
-            lastFrame = videoPlayer.frame;
-            Invoke("VerifyFrames", 2);
         }
-        else
-        Invoke("VerifyFrames", 2);
     }
+
+    double lastTimePlayed = Mathf.Infinity;
 
     void FixedUpdate()
     {
+        //buffering detect 
+        if (videoPlayer.isPlaying && (Time.frameCount % (int)(videoPlayer.frameRate + 1)) == 0)
+        {
+            if (lastTimePlayed == videoPlayer.time)//buffering
+            {
+                ShowLoading();
+                Debug.Log("Buffering");
+            }
+            else//not buffering
+            {
+                HideLoading();
+                //Debug.Log("Not buffering");
+            }
+            lastTimePlayed = videoPlayer.time;
+        }
+
+        if (!playUsingInternalDevicePlayer)
+        {
+            if (videoPlayer.isPlaying)
+                HideLoading();
+            else
+            {
+                if (!pauseCalled)
+                    ShowLoading();
+            }
+        }
+            
+
+        if (!loadYoutubeUrlsOnly)
+        {
+            if (showPlayerControls)
+            {
+                if (videoPlayer.isPlaying)
+                {
+                    totalVideoDuration = Mathf.RoundToInt(videoPlayer.frameCount / videoPlayer.frameRate);
+                    if (!lowRes)
+                    {
+                        audioDuration = Mathf.RoundToInt(audioPlayer.frameCount / audioPlayer.frameRate);
+                        if (audioDuration < totalVideoDuration && (audioPlayer.url != ""))
+                        {
+                            currentVideoDuration = Mathf.RoundToInt(audioPlayer.frame / audioPlayer.frameRate);
+                        }
+                        else
+                        {
+                            currentVideoDuration = Mathf.RoundToInt(videoPlayer.frame / videoPlayer.frameRate);
+                        }
+                    }
+                    else
+                    {
+                        currentVideoDuration = Mathf.RoundToInt(videoPlayer.frame / videoPlayer.frameRate);
+                    }
+
+                }
+            }
+
+            if (videoPlayer.frameCount > 0)
+            {
+                if (progress != null)
+                    progress.fillAmount = (float)videoPlayer.frame / (float)videoPlayer.frameCount;
+            }
+        }
 
         if (gettingYoutubeURL)
         {
@@ -459,7 +581,8 @@ public class YoutubePlayer : MonoBehaviour
 
             if (!showPlayerControls)
             {
-                mainControllerUi.SetActive(false);
+                if(mainControllerUi != null)
+                    mainControllerUi.SetActive(false);
             }
             else
                 mainControllerUi.SetActive(true);
@@ -483,22 +606,36 @@ public class YoutubePlayer : MonoBehaviour
         if (!loadYoutubeUrlsOnly)
         {
             //webgl
-            if (videoPlayer.isPrepared)
-            {
-                if (!startedPlayingWebgl)
-                {
-                    logTest = "Play!";
-                    startedPlayingWebgl = true;
-                    StartCoroutine(WebGLPlay());
-                }
-            }
+            //if (videoPlayer.isPrepared)
+            //{
+            //    if (!startedPlayingWebgl)
+            //    {
+            //        logTest = "Play!";
+            //        startedPlayingWebgl = true;
+            //        StartCoroutine(WebGLPlay());
+            //    }
+            //}
 
-            if (videoPlayer.isPrepared && audioPlayer.isPrepared && !videoPlayer.isPlaying)
+            if (videoPlayer.isPrepared && !videoPlayer.isPlaying)
             {
-                if (!videoStarted)
+                if(audioPlayer != null)
                 {
-                    videoStarted = true;
-                    VideoStarted(videoPlayer);
+                    if (audioPlayer.isPrepared)
+                    {
+                        if (!videoStarted)
+                        {
+                            videoStarted = true;
+                            VideoStarted(videoPlayer);
+                        }
+                    }
+                }
+                else
+                {
+                    if (!videoStarted)
+                    {
+                        videoStarted = true;
+                        VideoStarted(videoPlayer);
+                    }
                 }
 
             }
@@ -514,6 +651,8 @@ public class YoutubePlayer : MonoBehaviour
                     PlaybackDone(videoPlayer);
                 }
             }
+
+            
 
             if (videoPlayer.isPrepared)
             {
@@ -674,6 +813,7 @@ public class YoutubePlayer : MonoBehaviour
 
     private void PlayYoutubeVideo(string _videoId)
     {
+        
         if (videoQuality == YoutubeVideoQuality.STANDARD)
             lowRes = true;
         else
@@ -790,11 +930,16 @@ public class YoutubePlayer : MonoBehaviour
     {
         gettingYoutubeURL = false;
         List<VideoInfo> videoInfos = youtubeVideoInfos;
+        //foreach(VideoInfo v in videoInfos)
+        //{
+        //    Debug.Log(v.FormatCode + " " + v.Resolution + " " + v.VideoExtension + " " + v.VideoType + " " + v.Is3D);
+        //}
         videoDecryptDone = false;
         audioDecryptDone = false;
 
         decryptedUrlForVideo = false;
         decryptedUrlForAudio = false;
+
 
         if (videoQuality == YoutubeVideoQuality.STANDARD)
         {
@@ -807,7 +952,7 @@ public class YoutubePlayer : MonoBehaviour
                     if (info.RequiresDecryption)
                     {
                         //The string is the video url with audio
-
+                        
                         DecryptDownloadUrl(info.DownloadUrl, "", info.HtmlPlayerVersion, true);
                     }
                     else
@@ -834,6 +979,7 @@ public class YoutubePlayer : MonoBehaviour
                     if (info.RequiresDecryption)
                     {
                         needDecryption = true;
+                        
                         //The string is the video url with audio
                         _tempHtmlPlayerVersion = info.HtmlPlayerVersion;
                         _temporaryAudio = info.DownloadUrl;
@@ -873,8 +1019,8 @@ public class YoutubePlayer : MonoBehaviour
             //Get the high quality video
             foreach (VideoInfo info in videoInfos)
             {
-
-                if (info.VideoType == VideoType.Mp4 && info.Resolution == (quality))
+                VideoType t = (videoFormat == VideoFormatType.MP4) ? VideoType.Mp4 : VideoType.WebM;
+                if (info.VideoType == t && info.Resolution == (quality))
                 {
                     if (info.RequiresDecryption)
                     {
@@ -905,7 +1051,7 @@ public class YoutubePlayer : MonoBehaviour
                     //    videoPlayer.audioOutputMode = VideoAudioOutputMode.None;
                     //}
 
-                    //break;
+                    break;
                 }
             }
 
@@ -1026,7 +1172,8 @@ public class YoutubePlayer : MonoBehaviour
                 }
             }
 
-            DecryptDownloadUrl(_temporaryVideo, _temporaryAudio, _tempHtmlPlayerVersion, false);
+            if(needDecryption)
+                DecryptDownloadUrl(_temporaryVideo, _temporaryAudio, _tempHtmlPlayerVersion, false);
         }
     }
 
@@ -1036,11 +1183,12 @@ public class YoutubePlayer : MonoBehaviour
     {
         if (videoQuality != YoutubeVideoQuality.STANDARD)
         {
-            if (checkIfSync)
-            {
-                CancelInvoke("CheckIfIsSync");
-                InvokeRepeating("CheckIfIsSync", 1, 5);
-            }
+            //disabled for now, is as test
+            //if (checkIfSync)
+            //{
+            //    CancelInvoke("CheckIfIsSync");
+            //    InvokeRepeating("CheckIfIsSync", 1, 5);
+            //}
 
         }
 
@@ -1051,7 +1199,6 @@ public class YoutubePlayer : MonoBehaviour
         }
         else
         {
-
             StartPlayback();
         }
     }
@@ -1109,11 +1256,16 @@ public class YoutubePlayer : MonoBehaviour
         }
 
         if (videoQuality != YoutubeVideoQuality.STANDARD)
+        {
             audioPlayer.Play();
 
-        videoPlayer.Play();
-
-        
+            videoPlayer.Play();
+        }
+        else
+        {
+            videoPlayer.Play();
+        }
+            
 
         if (startFromSecond)
         {
@@ -1321,9 +1473,17 @@ public class YoutubePlayer : MonoBehaviour
         if (!loadYoutubeUrlsOnly) //If want to load urls only the video will not play
         {
 
+            var url = new Uri(videoUrl);
+            videoUrl = videoUrl.Replace(url.Host, "redirector.googlevideo.com");
+            if (videoQuality != YoutubeVideoQuality.STANDARD)
+            {
+                url = new Uri(audioUrl);
+                audioUrl = audioUrl.Replace(url.Host, "redirector.googlevideo.com");
+            }
+
             if (debug)
                 Debug.Log("Play!!" + videoUrl);
-
+            startedPlayingWebgl = false;
 
             //LoadPrepareCallbacks();
             videoPlayer.source = VideoSource.Url;
@@ -1356,39 +1516,55 @@ public class YoutubePlayer : MonoBehaviour
         StartPlayingWebgl();
     }
 
+    bool finishedCalled = false;
+    IEnumerator PreventFinishToBeCalledTwoTimes()
+    {
+        yield return new WaitForSeconds(1);
+        finishedCalled = false;
+    }
+
     public void OnVideoPlayerFinished()
     {
-        if (!loadYoutubeUrlsOnly)
+        if (!finishedCalled)
         {
-            if (videoPlayer.isPrepared)
+            finishedCalled = true;
+            StartCoroutine(PreventFinishToBeCalledTwoTimes());
+            if (!loadYoutubeUrlsOnly)
             {
-                if (debug)
-                    Debug.Log("Finished");
-                if (videoPlayer.isLooping)
+                if (videoPlayer.isPrepared)
                 {
-                    videoPlayer.time = 0;
-                    videoPlayer.frame = 0;
-                    audioPlayer.time = 0;
-                    audioPlayer.frame = 0;
-                    videoPlayer.Play();
-                    if (!noAudioAtacched)
-                        audioPlayer.Play();
+                    if (debug)
+                        Debug.Log("Finished");
+                    if (videoPlayer.isLooping)
+                    {
+                        videoPlayer.time = 0;
+                        videoPlayer.frame = 0;
+                        audioPlayer.time = 0;
+                        audioPlayer.frame = 0;
+                        videoPlayer.Play();
+                        if (!noAudioAtacched)
+                            audioPlayer.Play();
+                    }
+                    CancelInvoke("CheckIfIsSync");
+                    OnVideoFinished.Invoke();
+
+                    if (customPlaylist && autoPlayNextVideo)
+                    {
+                        Debug.Log("Calling next video of playlist");
+                        CallNextUrl();
+                    }
                 }
-                CancelInvoke("CheckIfIsSync");
-                OnVideoFinished.Invoke();
             }
-        }
-        else
-        {
-            if (playUsingInternalDevicePlayer)
+            else
             {
-                CancelInvoke("CheckIfIsSync");
-                OnVideoFinished.Invoke();
+                if (playUsingInternalDevicePlayer)
+                {
+                    CancelInvoke("CheckIfIsSync");
+                    OnVideoFinished.Invoke();
+                }
             }
         }
     }
-
-
 
     //Unity Video player callback
     private void PlaybackDone(VideoPlayer vPlayer)
@@ -1517,30 +1693,6 @@ public class YoutubePlayer : MonoBehaviour
         {
             if (showPlayerControls)
             {
-                if (videoPlayer.isPlaying)
-                {
-                    totalVideoDuration = Mathf.RoundToInt(videoPlayer.frameCount / videoPlayer.frameRate);
-                    if (!lowRes)
-                    {
-                        audioDuration = Mathf.RoundToInt(audioPlayer.frameCount / audioPlayer.frameRate);
-                        if (audioDuration < totalVideoDuration && (audioPlayer.url != ""))
-                        {
-                            currentVideoDuration = Mathf.RoundToInt(audioPlayer.frame / audioPlayer.frameRate);
-                        }
-                        else
-                        {
-                            currentVideoDuration = Mathf.RoundToInt(videoPlayer.frame / videoPlayer.frameRate);
-                        }
-                    }
-                    else
-                    {
-                        currentVideoDuration = Mathf.RoundToInt(videoPlayer.frame / videoPlayer.frameRate);
-                    }
-
-                }
-
-
-
                 if (autoHideControlsTime > 0)
                 {
                     if (UserInteract())
@@ -1561,12 +1713,6 @@ public class YoutubePlayer : MonoBehaviour
                     }
                 }
             }
-
-            if (videoPlayer.frameCount > 0)
-            {
-                if (progress != null)
-                    progress.fillAmount = (float)videoPlayer.frame / (float)videoPlayer.frameCount;
-            }
         }
     }
 
@@ -1575,8 +1721,7 @@ public class YoutubePlayer : MonoBehaviour
     public void Seek(float time)
     {
         waitAudioSeek = true;
-        videoPlayer.Pause();
-        audioPlayer.Pause();
+        Pause();
 
         if (videoQuality == YoutubeVideoQuality.STANDARD)
         {
@@ -1685,14 +1830,17 @@ public class YoutubePlayer : MonoBehaviour
 
     public void Stop()
     {
-        audioPlayer.seekCompleted -= AudioSeeked;
-        videoPlayer.seekCompleted -= VideoSeeked;
-        videoPlayer.frameDropped -= VideoPlayer_frameDropped;
-        audioPlayer.frameDropped -= AudioPlayer_frameDropped;
+        if (!playUsingInternalDevicePlayer)
+        {
+            audioPlayer.seekCompleted -= AudioSeeked;
+            videoPlayer.seekCompleted -= VideoSeeked;
+            videoPlayer.frameDropped -= VideoPlayer_frameDropped;
+            audioPlayer.frameDropped -= AudioPlayer_frameDropped;
 
-        videoPlayer.Stop();
-        if (!lowRes)
-            audioPlayer.Stop();
+            videoPlayer.Stop();
+            if (!lowRes && audioPlayer != null)
+                audioPlayer.Stop();
+        }
     }
 
     void SeekVideoDone(VideoPlayer vp)
@@ -1910,6 +2058,7 @@ public class YoutubePlayer : MonoBehaviour
         UnityWebRequest request = UnityWebRequest.Get(uri);
         //request.SetRequestHeader("User-Agent", USER_AGENT);
         yield return request.Send();
+        WriteLog("js", request.downloadHandler.text);
         ReadyForExtract(request.downloadHandler.text, audio);
     }
     #endregion
@@ -2058,10 +2207,16 @@ public class YoutubePlayer : MonoBehaviour
         string js = masterURLForVideo;
         //Find "C" in this: var A = B.sig||C (B.s)
         //string functNamePattern = @"(\w+)\s*=\s*function\(\s*(\w+)\s*\)\s*{\s*\2\s*=\s*\2\.split\(\""\""\)\s*;(.+)return\s*\2\.join\(\""\""\)\s*}\s*;";
-        string functNamePattern = patternNames[patternIndex];
-
-
-        var funcName = Regex.Match(js, functNamePattern).Groups[1].Value;
+        var funcName = "";
+        foreach ( string pat in patternNames)
+        {
+            string r  = Regex.Match(js, pat).Groups[1].Value;
+            if (!string.IsNullOrEmpty(r))
+            {
+                funcName = r;
+                break;
+            }
+        }
 
         if (funcName.Contains("$"))
         {
@@ -2183,15 +2338,18 @@ public class YoutubePlayer : MonoBehaviour
         if (string.IsNullOrEmpty(operations))
         {
             Debug.Log("Operation is empty for low qual, trying again.");
+           
             decryptedVideoUrlResult = null;
         }
         else
         {
             string magicResult = MagicHands.DecipherWithOperations(encryptedSignatureVideo, operations);
             decryptedVideoUrlResult = HTTPHelperYoutube.ReplaceQueryStringParameter(EncryptUrlForVideo, SignatureQuery, magicResult, lsigForVideo);
-
+            //var url = new Uri(decryptedVideoUrlResult);
+            //decryptedVideoUrlResult = decryptedVideoUrlResult.Replace(url.Host, "redirector.googlevideo.com");
         }
 
+        
         decryptedUrlForVideo = true;
     }
 
@@ -2230,7 +2388,16 @@ public class YoutubePlayer : MonoBehaviour
         //string functNamePattern = @"\b[cs]\s*&&\s*[adf]\.set\([^,]+\s*,\s*encodeURIComponent\s*\(\s*([\w$]+)\(";
         string functNamePattern = patternNames[patternIndex];
 
-        var funcName = Regex.Match(js, functNamePattern).Groups[1].Value;
+        var funcName = "";
+        foreach (string pat in patternNames)
+        {
+            string r = Regex.Match(js, pat).Groups[1].Value;
+            if (!string.IsNullOrEmpty(r))
+            {
+                funcName = r;
+                break;
+            }
+        }
 
 
         if (funcName.Contains("$"))
@@ -2315,9 +2482,13 @@ public class YoutubePlayer : MonoBehaviour
 
             decryptedAudioUrlResult = HTTPHelperYoutube.ReplaceQueryStringParameter(EncryptUrlForAudio, SignatureQuery, AudioMagicResult, lsigForAudio);
             decryptedVideoUrlResult = HTTPHelperYoutube.ReplaceQueryStringParameter(EncryptUrlForVideo, SignatureQuery, VideoMagicResult, lsigForVideo);
+
+            //var url = new Uri(decryptedAudioUrlResult);
+            //decryptedAudioUrlResult = decryptedAudioUrlResult.Replace(url.Host, "redirector.googlevideo.com");
+            //url = new Uri(decryptedVideoUrlResult);
+            //decryptedVideoUrlResult = decryptedVideoUrlResult.Replace(url.Host, "redirector.googlevideo.com");
         }
 
-        
         decryptedUrlForAudio = true;
         //decryptedUrlForVideo = true;
     }
@@ -2390,14 +2561,21 @@ public class YoutubePlayer : MonoBehaviour
 
             try
             {
-                var dataRegex = new Regex(@"ytplayer\.config\s*=\s*(\{.+?\});", RegexOptions.Multiline);
-                string extractedJson = dataRegex.Match(downloadYoutubeUrlResponse.data).Result("$1");
+                var dataRegex = new Regex(@"ytplayer\.config\s*=\s*(\{.+?\});ytplayer", RegexOptions.Multiline);
+                string extractedJson = dataRegex.Match(jsonForHtmlVersion).Result("$1");
                 JObject json = JObject.Parse(extractedJson);
                 string videoTitle = GetVideoTitle(json);
                 IEnumerable<ExtractionInfo> downloadUrls = ExtractDownloadUrls(json);
+               
                 List<VideoInfo> infos = GetVideoInfos(downloadUrls, videoTitle).ToList();
+              
                 string htmlPlayerVersion = GetHtml5PlayerVersion(json);
                 htmlVersion = GetHtml5PlayerVersion(json);
+                if (string.IsNullOrEmpty(htmlVersion))
+                {
+                    RetryPlayYoutubeVideo();
+                    return;
+                }
                 youtubeVideoInfos = infos;
                 foreach (VideoInfo info in youtubeVideoInfos)
                 {
@@ -2413,11 +2591,12 @@ public class YoutubePlayer : MonoBehaviour
                     Debug.Log("Resolver Exception!: " + e.Message);
                     //string filePath = Application.persistentDataPath + "/log_download_exception_" + DateTime.Now.ToString("ddMMyyyyhhmmssffff") + ".txt";
                     //Debug.Log("DownloadUrl content saved to " + filePath);
+                    WriteLog("log_download_exception","jsonForHtml: " + jsonForHtmlVersion);
                     //File.WriteAllText(filePath, downloadUrlResponse.data);
                     Debug.Log("retry!");
                     if (player != null)
                     {
-                        player.RetryPlayYoutubeVideo();
+                            player.RetryPlayYoutubeVideo();
                     }
                     else
                     {
@@ -2464,29 +2643,53 @@ public class YoutubePlayer : MonoBehaviour
 
     private static IEnumerable<ExtractionInfo> ExtractDownloadUrls(JObject json)
     {
-        string[] splitByUrls = GetStreamMap(json).Split(',');
-        string[] adaptiveFmtSplitByUrls = GetAdaptiveStreamMap(json).Split(',');
-        splitByUrls = splitByUrls.Concat(adaptiveFmtSplitByUrls).ToArray();
+        List<string> urls = new List<string>();
+        List<string> ciphers = new List<string>();
+        JObject newJson = JObject.Parse(json["args"]["player_response"].ToString());
 
-        foreach (string s in splitByUrls)
+        if (newJson["streamingData"]["formats"][0]["cipher"] != null)
+        {
+            foreach(var j in newJson["streamingData"]["formats"])
+            {
+                ciphers.Add(j["cipher"].ToString());
+            }
+
+            foreach (var j in newJson["streamingData"]["adaptiveFormats"])
+            {
+                ciphers.Add(j["cipher"].ToString());
+            }
+        }
+        else
+        {
+            foreach (var j in newJson["streamingData"]["formats"])
+            {
+                urls.Add(j["url"].ToString());
+            }
+
+            foreach (var j in newJson["streamingData"]["adaptiveFormats"])
+            {
+                urls.Add(j["url"].ToString());
+            }
+        }
+
+        foreach (string s in ciphers)
         {
             IDictionary<string, string> queries = HTTPHelperYoutube.ParseQueryString(s);
 
             string url;
 
             bool requiresDecryption = false;
-            
+
             if (queries.ContainsKey("sp"))
                 SignatureQuery = "sig";
             else
                 SignatureQuery = "signatures";
 
+
             if (queries.ContainsKey("s") || queries.ContainsKey("signature"))
             {
                 requiresDecryption = queries.ContainsKey("s");
                 string signature = queries.ContainsKey("s") ? queries["s"] : queries["signature"];
-
-                
 
                 if(sp != "none")
                 {
@@ -2516,16 +2719,41 @@ public class YoutubePlayer : MonoBehaviour
                 url += string.Format("&{0}={1}", RateBypassFlag, "yes");
             yield return new ExtractionInfo { RequiresDecryption = requiresDecryption, Uri = new Uri(url) };
         }
+
+        foreach (string s in urls)
+        {
+            string url = s;
+            url = HTTPHelperYoutube.UrlDecode(url);
+            url = HTTPHelperYoutube.UrlDecode(url);
+
+            IDictionary<string, string> parameters = HTTPHelperYoutube.ParseQueryString(url);
+            if (!parameters.ContainsKey(RateBypassFlag))
+                url += string.Format("&{0}={1}", RateBypassFlag, "yes");
+            yield return new ExtractionInfo { RequiresDecryption = false, Uri = new Uri(url) };
+        }
     }
 
     private static string GetAdaptiveStreamMap(JObject json)
     {
+        Debug.Log("Ok");
         JToken streamMap = json["args"]["adaptive_fmts"];
-
+        Debug.Log("fine");
         // bugfix: adaptive_fmts is missing in some videos, use url_encoded_fmt_stream_map instead
         if (streamMap == null)
         {
+            Debug.Log("32");
             streamMap = json["args"]["url_encoded_fmt_stream_map"];
+            Debug.Log("33");
+            if (streamMap == null)
+            {
+                Debug.Log("45");
+                string unescaped = Regex.Unescape(json["args"]["player_response"].ToString());
+                JObject newJson = JObject.Parse(json["args"]["player_response"].ToString());
+                streamMap = newJson["streamingData"]["adaptiveFormats"];
+                WriteLog("NewJson", newJson.ToString());
+                Debug.Log("53");
+                Debug.Log(streamMap);
+            }
         }
 
         return streamMap.ToString();
@@ -2561,11 +2789,20 @@ public class YoutubePlayer : MonoBehaviour
     {
         JToken streamMap = json["args"]["url_encoded_fmt_stream_map"];
 
+        if (streamMap == null)
+        {
+            JObject newJson = JObject.Parse(json["args"]["player_response"].ToString());
+            streamMap = newJson["streamingData"]["formats"];
+        }
+
         string streamMapString = streamMap == null ? null : streamMap.ToString();
 
         if (streamMapString == null || streamMapString.Contains("been+removed"))
         {
-            throw new VideoNotAvailableException("Video is removed or has an age restriction.");
+            if (streamMapString.Contains("been+removed"))
+                throw new VideoNotAvailableException("Video is removed or has an age restriction.");
+            else
+                return null;
         }
 
         return streamMapString;
@@ -2651,6 +2888,9 @@ public class YoutubePlayer : MonoBehaviour
         { Debug.Log("Youtube UnityWebRequest responseCode:" + request.responseCode); }
     }
 
+    [HideInInspector]
+    public string jsonForHtmlVersion = "";
+
     IEnumerator DownloadYoutubeUrl(string url, Action callback, YoutubePlayer player)
     {
         downloadYoutubeUrlResponse = new DownloadUrlResponse();
@@ -2669,6 +2909,8 @@ public class YoutubePlayer : MonoBehaviour
                 if (request.downloadHandler.isDone)
                 {
                     downloadYoutubeUrlResponse.isValid = true;
+                    jsonForHtmlVersion = request.downloadHandler.text;
+                    
                     downloadYoutubeUrlResponse.data = request.downloadHandler.text;
                 }
             }
@@ -2678,6 +2920,13 @@ public class YoutubePlayer : MonoBehaviour
         { Debug.Log("Youtube UnityWebRequest responseCode:" + request.responseCode); }
 
         YoutubeURLDownloadFinished(callback, player);
+    }
+
+    public static void WriteLog(string filename, string c)
+    {
+        string filePath = Application.persistentDataPath + "/"+filename+"_" + DateTime.Now.ToString("ddMMyyyyhhmmssffff") + ".txt";
+        //Debug.Log("DownloadUrl content saved to " + filePath);
+        File.WriteAllText(filePath, c);
     }
 
     private static void ThrowYoutubeParseException(Exception innerException, string videoUrl)
@@ -2777,15 +3026,12 @@ public class YoutubePlayer : MonoBehaviour
     IEnumerator WaitSync()
     {
         yield return new WaitForSeconds(2f);
-        videoPlayer.Play();
-        if (videoQuality != YoutubeVideoQuality.STANDARD)
-            audioPlayer.Play();
+        Play();
         Invoke("VerifyFrames", 2);
     }
 
     IEnumerator PlayNow()
     {
-
         if (videoQuality == YoutubeVideoQuality.STANDARD)
         {
             yield return new WaitForSeconds(0);
@@ -2799,9 +3045,7 @@ public class YoutubePlayer : MonoBehaviour
         {
             dropAlreadyCalled = false;
             ignoreDrop = true;
-            videoPlayer.Play();
-            if (videoQuality != YoutubeVideoQuality.STANDARD)
-                audioPlayer.Play();
+            Play();
             StartCoroutine(ReleaseDrop());
         }
         else
@@ -2812,15 +3056,17 @@ public class YoutubePlayer : MonoBehaviour
 
     void CheckIfIsSync()
     {
-        if (videoPlayer.frame != audioPlayer.frame && notSeeking && videoPlayer.isPlaying)
-        {
-            notSeeking = false;
-            Debug.Log("Out of Sync, trying to sync again");
-            videoPlayer.Pause();
-            audioPlayer.Pause();
-            waitAudioSeek = true;
-            audioPlayer.frame = videoPlayer.frame;
-        }
+
+        //disabled for now, just for test purpouses.
+        //if (videoPlayer.frame != audioPlayer.frame && notSeeking && videoPlayer.isPlaying)
+        //{
+        //    notSeeking = false;
+        //    Debug.Log("Out of Sync, trying to sync again");
+        //    videoPlayer.Pause();
+        //    audioPlayer.Pause();
+        //    waitAudioSeek = true;
+        //    audioPlayer.frame = videoPlayer.frame;
+        //}
     }
 
     IEnumerator ReleaseDrop()
@@ -2835,8 +3081,7 @@ public class YoutubePlayer : MonoBehaviour
         startedFromTime = false;
         if (!pauseCalled)
         {
-            videoPlayer.Play();
-            audioPlayer.Play();
+            Play();
         }
         else
         {
@@ -2883,7 +3128,7 @@ public class YoutubePlayer : MonoBehaviour
     }
     #endregion
 
-    [Header("Can cause some stucks, Experimental")]
+    [HideInInspector]
     public bool checkIfSync = false;
 }
 

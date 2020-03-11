@@ -331,7 +331,8 @@ public class VW_Gameloop : MonoBehaviour
     private IEnumerator GradualVolumeIncrease()
     {
         music = "https://www.youtube.com/watch?v=k68thGEDlx8";
-        ytplayer.Play("https://www.youtube.com/watch?v=qEzWqUhnbVA&list=RDk68thGEDlx8&index=3");
+        ytplayer.Play("https://www.youtube.com/watch?v=k68thGEDlx8");
+        Debug.Log("starting music");
 
         ytplayer.GetComponent<AudioSource>().volume = 0;
         for (int i = 0; i < 20; i++)
