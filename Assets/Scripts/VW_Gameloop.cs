@@ -66,12 +66,9 @@ public class VW_Gameloop : MonoBehaviour
     [SerializeField] Button option2Button;
     [SerializeField] Button option3Button;
     [SerializeField] Button continueButton;
-    [SerializeField] Button readSourceTextButton;
-    [SerializeField] Button closeSourceTextButton;
+    //[SerializeField] Button readSourceTextButton;
     [SerializeField] Button mapButton;
-    [SerializeField] Button CloseMapButton;
     [SerializeField] Button virtuesButton;
-    [SerializeField] Button closeVirtuesButton;
 
     // Scrollers
     [SerializeField] TextScroller sourceTextScroller;
@@ -103,7 +100,6 @@ public class VW_Gameloop : MonoBehaviour
     private string option3NeutralOutcomeText = "";            
 
     public int currentRoomId = 1;
-    private bool mapIsOn;
     private bool firstRunDone;
 
     private string nextBackgroundURI;
@@ -376,48 +372,26 @@ public class VW_Gameloop : MonoBehaviour
 
     public void PressVirtuesButton()
     {
-        virtuesPanel.SetActive(true);
-        virtuesButton.gameObject.SetActive(false);
-        closeVirtuesButton.gameObject.SetActive(true);
-        promptTextGUI.gameObject.SetActive(false);
-        descriptionTextGUI.gameObject.SetActive(false);
+        if (virtuesPanel.activeSelf == false)
+        {
+            virtuesPanel.SetActive(true);
+        
+        } else
+        {
+            virtuesPanel.SetActive(false);
+        } 
     }
-
-    public void PressCloseVirtuesButton()
-    {
-        virtuesPanel.SetActive(false);
-        closeVirtuesButton.gameObject.SetActive(false);
-        virtuesButton.gameObject.SetActive(true);
-        promptTextGUI.gameObject.SetActive(true);
-        descriptionTextGUI.gameObject.SetActive(true);
-    }
-
-
+    
     public void PressMapButton()
     {
-     
-        MapPanel.SetActive(true);
-        mapButton.gameObject.SetActive(false);
-        CloseMapButton.gameObject.SetActive(true);
-        optionButtonsPanel.SetActive(false);
-    }
-
-    public void PressCloseMapButton()
-    {
-        MapPanel.SetActive(false);
-        mapButton.gameObject.SetActive(true);
-        CloseMapButton.gameObject.SetActive(false);
-        optionButtonsPanel.SetActive(true);
-
-
-    }
-
-    public void CloseMapPanel()
-    {
-        MapPanel.SetActive(false);
-        mapIsOn = false;
-        Debug.Log("mapIsOn = " + mapIsOn);
-
+        if (MapPanel.activeSelf == false)
+        {
+            MapPanel.SetActive(true);
+        }
+        else
+        {
+            MapPanel.SetActive(false);
+        }
     }
 
     private IEnumerator StartFadeIn()
@@ -430,10 +404,9 @@ public class VW_Gameloop : MonoBehaviour
         virtuesPanel.SetActive(false);
         TransitionFadeOutPanel.GetComponent<Animation>().Play("TransitionPanelFadeIn");
       
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         virtuesButton.gameObject.SetActive(true);
         mapButton.gameObject.SetActive(true);
-        readSourceTextButton.gameObject.SetActive(true);
         TransitionFadeOutPanel.SetActive(false);
         StartCoroutine(BeginDescriptionTextScroll());
         Debug.Log("End StartFadeIn coroutine");
@@ -470,7 +443,7 @@ public class VW_Gameloop : MonoBehaviour
             option3Button.gameObject.SetActive(true);
         }
 
-        readSourceTextButton.gameObject.SetActive(true);
+        //readSourceTextButton.gameObject.SetActive(true);
         Debug.Log("End descriptionscroll coroutine");
     }
 
@@ -530,8 +503,8 @@ public class VW_Gameloop : MonoBehaviour
         //PressAudioButton();
         sourceTextPanel.SetActive(true);
         sourceTextScroller.ResetPosition();
-        readSourceTextButton.gameObject.SetActive(false);
-        closeSourceTextButton.gameObject.SetActive(true);
+        //readSourceTextButton.gameObject.SetActive(false);
+        //closeSourceTextButton.gameObject.SetActive(true);
         promptTextGUI.gameObject.SetActive(false);
         StartCoroutine(WaitForSourceTextScroll());
 
@@ -555,33 +528,10 @@ public class VW_Gameloop : MonoBehaviour
     private IEnumerator SourceTextHelper()
     {
         yield return new WaitForSeconds(0.1f);
-        PressCloseSourceTextButton();
+        //PressCloseSourceTextButton();
     }
 
-    public void PressCloseSourceTextButton()
-    {
-        Debug.Log("Begin PressCloseSourceTextButton method");
-        //ytplayer.Stop();
-        sourceTextPanel.SetActive(false);
-        sourceTextScroller.scrolling = false;
-        sourceTextScroller.ResetPosition();        
-        
-        closeSourceTextButton.gameObject.SetActive(false);     
-        
-        if(firstRunDone == true)
-        {
-            StartCoroutine(CloseSourceTextHelper());
-        }
-        else
-        {
-            optionButtonsPanel.SetActive(true);
-            readSourceTextButton.gameObject.SetActive(true);
-            StartCoroutine(BeginDescriptionTextScroll());
-            promptTextGUI.gameObject.SetActive(true);
-            //virtuesPanel.SetActive(true);
-        }
-        Debug.Log("End PressCloseSourceTextButton method");
-    }
+    
 
     private IEnumerator CloseSourceTextHelper()
     {
@@ -599,8 +549,8 @@ public class VW_Gameloop : MonoBehaviour
         descriptionPanel.SetActive(true);
         //virtuesPanel.SetActive(true);
         optionButtonsPanel.SetActive(true);
-        readSourceTextButton.gameObject.SetActive(true);
-        closeSourceTextButton.gameObject.SetActive(false);
+        //readSourceTextButton.gameObject.SetActive(true);
+        //closeSourceTextButton.gameObject.SetActive(false);
         promptTextGUI.gameObject.SetActive(true);
         Debug.Log("End WaitForSourceTextScroll coroutine");
     }
@@ -977,7 +927,7 @@ public class VW_Gameloop : MonoBehaviour
         yield return new WaitForSeconds(3);
         PressSourceTextButton();
         yield return new WaitForSeconds(0.5f);
-        PressCloseSourceTextButton();
+        //PressCloseSourceTextButton();
         yield return new WaitForSeconds(0.5f);
         promptTextGUI.gameObject.SetActive(false);
         optionButtonsPanel.SetActive(false);
@@ -1005,10 +955,10 @@ public class VW_Gameloop : MonoBehaviour
     {
         GetRoomData(currentRoomId);
         PreloadNextBackgroundImage(ds.GetRoomDataString(currentRoomId + 1, "background_img"));
-        //TextAsset sourceTextFileContents = Resources.Load<TextAsset>("SourceMaterial/SourceText/" + source_text);
-        //TextAsset descriptionTextFileContents = Resources.Load<TextAsset>("SourceMaterial/DescriptionText/" + description_text);
+        TextAsset sourceTextFileContents = Resources.Load<TextAsset>("SourceMaterial/SourceText/" + source_text);
+        TextAsset descriptionTextFileContents = Resources.Load<TextAsset>("SourceMaterial/DescriptionText/" + description_text);
         //sourceTextGUI.text = sourceTextFileContents.text;
-        //descriptionTextGUI.text = descriptionTextFileContents.text;
+        descriptionTextGUI.text = descriptionTextFileContents.text;
         promptTextGUI.text = prompt_text;
 
         //option1
