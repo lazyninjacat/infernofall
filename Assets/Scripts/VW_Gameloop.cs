@@ -50,15 +50,30 @@ public class VW_Gameloop : MonoBehaviour
     [SerializeField] TextMeshProUGUI temperanceText;
     [SerializeField] TextMeshProUGUI temperanceAmountText;
 
-    // Virtue Progress Bar Circles
+    [SerializeField] TextMeshProUGUI Option1Text;
+    [SerializeField] TextMeshProUGUI Option2Text;
+    [SerializeField] TextMeshProUGUI Option3Text;
+    [SerializeField] GameObject optionsTextPanel;
+
+
+    // Virtue Progress Bars and Percent Texts
     [SerializeField] GameObject virtuesPanel;
-    [SerializeField] ProgressBarCircle PrudenceBar;
-    [SerializeField] ProgressBarCircle TemperanceBar;
-    [SerializeField] ProgressBarCircle JusticeBar;
-    [SerializeField] ProgressBarCircle FaithBar;
-    [SerializeField] ProgressBarCircle HopeBar;
-    [SerializeField] ProgressBarCircle CharityBar;
-    [SerializeField] ProgressBarCircle CourageBar;
+    [SerializeField] Image PrudenceBar;
+    [SerializeField] Image TemperanceBar;
+    [SerializeField] Image JusticeBar;
+    [SerializeField] Image FaithBar;
+    [SerializeField] Image HopeBar;
+    [SerializeField] Image CharityBar;
+    [SerializeField] Image CourageBar;
+    [SerializeField] TextMeshProUGUI CouragePercentText;
+    [SerializeField] TextMeshProUGUI PrudencePercentText;
+    [SerializeField] TextMeshProUGUI JusticePercentText;
+    [SerializeField] TextMeshProUGUI TemperancePercentText;
+    [SerializeField] TextMeshProUGUI FaithPercentText;
+    [SerializeField] TextMeshProUGUI HopePercentText;
+    [SerializeField] TextMeshProUGUI CharityPercentText;
+
+
 
     // Buttons
     [SerializeField] GameObject optionButtonsPanel;
@@ -422,25 +437,44 @@ public class VW_Gameloop : MonoBehaviour
         yield return new WaitUntil(() => descriptionTextScroller.scrolling == false);
         promptTextGUI.gameObject.SetActive(true);
         //promptTextGUI.gameObject.GetComponent<Animation>().Play("RollOutcomeTextFadeIn");
-        optionButtonsPanel.SetActive(true);      
+        optionButtonsPanel.SetActive(true);
+        optionsTextPanel.SetActive(true);
 
         if (number_options == 1)
         {
             option1Button.gameObject.SetActive(true);
+            Option1Text.gameObject.SetActive(true);
+
             option2Button.gameObject.SetActive(false);
+            Option2Text.gameObject.SetActive(false);
+
             option3Button.gameObject.SetActive(false);
+            Option3Text.gameObject.SetActive(false);
+
         }
         if (number_options == 2)
         {
             option1Button.gameObject.SetActive(true);
+            Option1Text.gameObject.SetActive(true);
+
             option2Button.gameObject.SetActive(true);
+            Option2Text.gameObject.SetActive(true);
+
             option3Button.gameObject.SetActive(false);
+            Option3Text.gameObject.SetActive(false);
+
         }
         if (number_options == 3)
         {
             option1Button.gameObject.SetActive(true);
+            Option1Text.gameObject.SetActive(true);
+
             option2Button.gameObject.SetActive(true);
+            Option2Text.gameObject.SetActive(true);
+
             option3Button.gameObject.SetActive(true);
+            Option3Text.gameObject.SetActive(true);
+
         }
 
         //readSourceTextButton.gameObject.SetActive(true);
@@ -530,9 +564,7 @@ public class VW_Gameloop : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         //PressCloseSourceTextButton();
     }
-
-    
-
+        
     private IEnumerator CloseSourceTextHelper()
     {
         yield return new WaitForSeconds(0.1f);
@@ -569,15 +601,31 @@ public class VW_Gameloop : MonoBehaviour
 
     private void SetVirtueBars()
     {
-        CourageBar.BarValue = Courage;
-        TemperanceBar.BarValue = Temperance;
-        JusticeBar.BarValue = Justice;
-        PrudenceBar.BarValue = Prudence;
-        FaithBar.BarValue = Faith;
-        HopeBar.BarValue = Hope;
-        CharityBar.BarValue = Charity;
+        CourageBar.fillAmount = Courage * 0.01f;
+        CouragePercentText.text = Courage.ToString() + "%";
+
+        TemperanceBar.fillAmount = Temperance * 0.01f;
+        TemperancePercentText.text = Temperance.ToString() + "%";
+
+        JusticeBar.fillAmount = Justice * 0.01f;
+        JusticePercentText.text = Justice.ToString() + "%";
+
+        PrudenceBar.fillAmount = Prudence * 0.01f;
+        PrudencePercentText.text = Prudence.ToString() + "%";
+
+        FaithBar.fillAmount = Faith * 0.01f;
+        FaithPercentText.text = Faith.ToString() + "%";
+
+        HopeBar.fillAmount = Hope * 0.01f;
+        HopePercentText.text = Hope.ToString() + "%";
+
+        CharityBar.fillAmount = Charity * 0.01f;
+        CharityPercentText.text = Charity.ToString() + "%";
+      
+
+
     }
-     
+
     #endregion
 
     #region Option Button Methods
@@ -820,6 +868,7 @@ public class VW_Gameloop : MonoBehaviour
         rollOutcomeTextGUI.gameObject.SetActive(true);
         continueButton.gameObject.SetActive(true);
         descriptionPanel.SetActive(false);
+        optionsTextPanel.SetActive(false);
         int gbn = RollOutcomeGoodBadNuetral();
 
         if (gbn == 1)
@@ -841,6 +890,7 @@ public class VW_Gameloop : MonoBehaviour
 
         optionButtonsPanel.SetActive(false);
         promptTextGUI.gameObject.SetActive(false);
+        optionsTextPanel.SetActive(false);
 
         SetVirtueBars();
         Debug.Log("End PressOption1Button method");
@@ -853,6 +903,8 @@ public class VW_Gameloop : MonoBehaviour
         rollOutcomeTextGUI.gameObject.SetActive(true);
         continueButton.gameObject.SetActive(true);
         descriptionPanel.SetActive(false);
+        optionsTextPanel.SetActive(false);
+
         int gbn = RollOutcomeGoodBadNuetral();
 
         if (gbn == 1)
@@ -887,6 +939,8 @@ public class VW_Gameloop : MonoBehaviour
         rollOutcomeTextGUI.gameObject.SetActive(true);
         continueButton.gameObject.SetActive(true);
         descriptionPanel.SetActive(false);
+        optionsTextPanel.SetActive(false);
+
         int gbn = RollOutcomeGoodBadNuetral();
 
         if (gbn == 1)
@@ -925,10 +979,10 @@ public class VW_Gameloop : MonoBehaviour
         TransitionFadeOutPanel.SetActive(true);
         TransitionFadeOutPanel.GetComponent<Animation>().Play("TransitionPanelFadeOut");
         yield return new WaitForSeconds(3);
-        PressSourceTextButton();
-        yield return new WaitForSeconds(0.5f);
+        //PressSourceTextButton();
+        //yield return new WaitForSeconds(0.5f);
         //PressCloseSourceTextButton();
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
         promptTextGUI.gameObject.SetActive(false);
         optionButtonsPanel.SetActive(false);
         if (backgroundA == true)
@@ -947,7 +1001,7 @@ public class VW_Gameloop : MonoBehaviour
         TransitionFadeOutPanel.GetComponent<Animation>().Play("TransitionPanelFadeIn");
         yield return new WaitForSeconds(3);
         TransitionFadeOutPanel.SetActive(false);
-        //StartCoroutine(BeginDescriptionTextScroll());
+        StartCoroutine(BeginDescriptionTextScroll());
         Debug.Log("End RoomTransition coroutine");
     }
 
@@ -955,11 +1009,17 @@ public class VW_Gameloop : MonoBehaviour
     {
         GetRoomData(currentRoomId);
         PreloadNextBackgroundImage(ds.GetRoomDataString(currentRoomId + 1, "background_img"));
-        TextAsset sourceTextFileContents = Resources.Load<TextAsset>("SourceMaterial/SourceText/" + source_text);
-        TextAsset descriptionTextFileContents = Resources.Load<TextAsset>("SourceMaterial/DescriptionText/" + description_text);
+        //TextAsset sourceTextFileContents = Resources.Load<TextAsset>("SourceMaterial/SourceText/" + source_text);
+        //TextAsset descriptionTextFileContents = Resources.Load<TextAsset>("SourceMaterial/DescriptionText/" + description_text);
         //sourceTextGUI.text = sourceTextFileContents.text;
-        descriptionTextGUI.text = descriptionTextFileContents.text;
+        descriptionTextGUI.text = description_text;
         promptTextGUI.text = prompt_text;
+
+        //Option Texts
+        Option1Text.text = "1) " + option1_text;
+        Option2Text.text = "2) " + option2_text;
+        Option3Text.text = "3) " + option3_text;
+
 
         //option1
         option1GoodOutcomeText = option1_good_outcome_text;

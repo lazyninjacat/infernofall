@@ -63,7 +63,7 @@ public class TextScroller : MonoBehaviour
         }
         else
         {
-            stopScrollPositionY = stopScrollPositionY + (rectTransform.rect.height / 2);
+            stopScrollPositionY = stopScrollPositionY + ((rectTransform.rect.height / 2));
         }
         Debug.Log("stopScrollPosiiton = " + stopScrollPositionY);
         Debug.Log("transform.position.y = " + transform.position.y);
