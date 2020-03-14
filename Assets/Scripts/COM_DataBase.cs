@@ -76,14 +76,7 @@ public class DataService  {
     public int GetRoomDataInt(int roomId, string requestedColumnName)
     {
         string query = "SELECT " + requestedColumnName + " FROM room_data WHERE room_id = ?";
-        if (_connection.ExecuteScalar<int>(query, roomId) != null)
-        {
-            return _connection.ExecuteScalar<int>(query, roomId);
-        }
-        else
-        {
-            return 0;
-        }
+        return _connection.ExecuteScalar<int>(query, roomId);
     }
 
 }
