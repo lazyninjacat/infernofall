@@ -42,7 +42,7 @@ public class TextScroller : MonoBehaviour
     {
         var parentRectTransform = transform.parent.GetComponent<RectTransform>();
         var rectTransform = transform.GetComponent<RectTransform>();
-        Debug.Log("**************************rectTransform size delta y = " + rectTransform.sizeDelta.y);
+        //Debug.Log("**************************rectTransform size delta y = " + rectTransform.sizeDelta.y);
 
 
         startScrollPositionY = 0;
@@ -65,11 +65,11 @@ public class TextScroller : MonoBehaviour
         {
             stopScrollPositionY = stopScrollPositionY + ((rectTransform.rect.height / 2));
         }
-        Debug.Log("stopScrollPosiiton = " + stopScrollPositionY);
-        Debug.Log("transform.position.y = " + transform.position.y);
-        Debug.Log("transform.localPosition.y = " + transform.localPosition.y);
-        Debug.Log("startposition.y= " + startPosition.y);
-        Debug.Log("startScrollPosition = " + startScrollPositionY);
+        //Debug.Log("stopScrollPosiiton = " + stopScrollPositionY);
+        //Debug.Log("transform.position.y = " + transform.position.y);
+        //Debug.Log("transform.localPosition.y = " + transform.localPosition.y);
+        //Debug.Log("startposition.y= " + startPosition.y);
+        //Debug.Log("startScrollPosition = " + startScrollPositionY);
 
 
         startPosition = new Vector3(0, startScrollPositionY, 0);

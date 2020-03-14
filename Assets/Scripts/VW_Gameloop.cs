@@ -16,7 +16,10 @@ public class VW_Gameloop : MonoBehaviour
     private DataService ds = StartupScript.ds;
 
     // Youtube player
-    [SerializeField] YoutubePlayer ytplayer;
+    [SerializeField] YoutubePlayer ytplayer1;
+    [SerializeField] YoutubePlayer ytplayer2;
+    public int activeYTPlayer = -1;
+
 
     // Transition Panel
     [SerializeField] GameObject TransitionFadeOutPanel;
@@ -125,7 +128,7 @@ public class VW_Gameloop : MonoBehaviour
     private string description_text;
     private string area;
     private string background_img;
-    private string music;
+    private int music = 1;
     private string room_sound_effect;
     private string option1_sound_effect;
     private string option2_sound_effect;
@@ -210,7 +213,7 @@ public class VW_Gameloop : MonoBehaviour
     private int option3_bad_hope;
     private int option3_bad_charity;
 
-
+    private Music musicList;
 
 
 
@@ -220,6 +223,8 @@ public class VW_Gameloop : MonoBehaviour
 
     void Start()
     {
+        musicList = new Music();
+
         Debug.Log("Begin Start method");
         //Prudence = PlayerPrefs.GetInt("PrudenceKey");
         //Temperance = PlayerPrefs.GetInt("TemperanceKey");
@@ -233,7 +238,6 @@ public class VW_Gameloop : MonoBehaviour
         ChangeRoom();
         backgroundImgA.texture = Resources.Load<Texture2D>("SourceMaterial/Images/1_1");
         StartCoroutine(StartFadeIn());
-        StartSoundtrack();
         Debug.Log("End Start method");
 
 
@@ -335,24 +339,130 @@ public class VW_Gameloop : MonoBehaviour
     }
 
     public void StartSoundtrack()
-    {
+    {   
+
         StartCoroutine(GradualVolumeIncrease());
+
+
+    }
+
+    private string SelectMusicString(int musicNumber)
+    {
+        if (musicNumber == 1)
+        {
+            return musicList.Music1;
+        }
+        else if (musicNumber == 2)
+        {
+            return musicList.Music2;
+        }
+        else if (musicNumber == 3)
+        {
+            return musicList.Music3;
+        }
+        else if (musicNumber == 4)
+        {
+            return musicList.Music4;
+        }
+        else if (musicNumber == 5)
+        {
+            return musicList.Music5;
+        }
+        else if (musicNumber == 6)
+        {
+            return musicList.Music6;
+        }
+        else if (musicNumber == 7)
+        {
+            return musicList.Music7;
+        }
+        else if (musicNumber == 8)
+        {
+            return musicList.Music8;
+        }
+        else
+        {
+            Debug.Log("Error. musicNumber = " + musicNumber + " is not valid");
+            return "";
+        }
     }
 
     private IEnumerator GradualVolumeIncrease()
     {
-        music = "https://www.youtube.com/watch?v=k68thGEDlx8";
-        ytplayer.Play("https://www.youtube.com/watch?v=k68thGEDlx8");
-        Debug.Log("starting music");
-
-        ytplayer.GetComponent<AudioSource>().volume = 0;
-        for (int i = 0; i < 20; i++)
+        if (ytplayer1.videoPlayer.isPlaying)
         {
-            yield return new WaitForSeconds(1);
-            ytplayer.GetComponent<AudioSource>().volume = ((ytplayer.GetComponent<AudioSource>().volume) + 0.0125f);
+            activeYTPlayer = 1;
         }
-        Debug.Log("************************************* Done raising volume");
+        else if (ytplayer2.videoPlayer.isPlaying)
+        {
+            activeYTPlayer = 2;
+        }
+        else
+        {
+            activeYTPlayer = -1;
+        }
+
+        Debug.Log("activeTYPlayer = " + activeYTPlayer);
+
+        if (activeYTPlayer == -1)
+        {
+            ytplayer1.Play(SelectMusicString(music));            
+            ytplayer1.GetComponent<AudioSource>().volume = 0;
+
+            for (int i = 0; i < 20; i++)
+            {
+                yield return new WaitForSeconds(0.5f);
+                ytplayer1.GetComponent<AudioSource>().volume += 0.0125f;
+                Debug.Log("timestep = " + i);
+
+            }
+        }        
+        else if (activeYTPlayer == 2)
+        {
+            ytplayer1.Play(SelectMusicString(music));
+            ytplayer1.GetComponent<AudioSource>().volume = 0;
+            ytplayer2.GetComponent<AudioSource>().volume = 0.25f;
+
+            for (int i = 0; i < 20; i++)
+            {
+                yield return new WaitForSeconds(0.5f);
+                ytplayer1.GetComponent<AudioSource>().volume += 0.0125f;
+                ytplayer2.GetComponent<AudioSource>().volume -= 0.0125f;
+                Debug.Log("timestep = " + i);
+
+            }
+            Debug.Log("Stopping ytPlayer1");
+            ytplayer2.Stop();
+
+        }
+        else if (activeYTPlayer == 1)
+        {
+            ytplayer2.Play(SelectMusicString(music));
+            ytplayer2.GetComponent<AudioSource>().volume = 0;
+            ytplayer1.GetComponent<AudioSource>().volume = 0.25f;
+
+            for (int i = 0; i < 20; i++)
+            {
+                yield return new WaitForSeconds(0.5f);
+                ytplayer2.GetComponent<AudioSource>().volume += 0.0125f;
+                ytplayer1.GetComponent<AudioSource>().volume -= 0.0125f;
+                Debug.Log("timestep = " + i);
+
+
+            }
+            Debug.Log("Stopping ytPlayer2");
+
+            ytplayer1.Stop();
+
+        }
+        else
+        {
+            Debug.Log("Something went wrong. activeYTPlayer = " + activeYTPlayer);
+        }
+        
     }
+
+
 
     //public void PressAudioButton()
     //{
@@ -1007,7 +1117,9 @@ public class VW_Gameloop : MonoBehaviour
 
     private void ChangeRoom()
     {
+        Debug.Log("Changing Room");
         GetRoomData(currentRoomId);
+        StartSoundtrack();
         PreloadNextBackgroundImage(ds.GetRoomDataString(currentRoomId + 1, "background_img"));
         //TextAsset sourceTextFileContents = Resources.Load<TextAsset>("SourceMaterial/SourceText/" + source_text);
         //TextAsset descriptionTextFileContents = Resources.Load<TextAsset>("SourceMaterial/DescriptionText/" + description_text);
@@ -1124,10 +1236,11 @@ public class VW_Gameloop : MonoBehaviour
     /// <param name="roomId"></param>
     private void GetRoomData(int roomId)
     {
+        Debug.Log("Getting Room Data");
         canto = ds.GetRoomDataInt(roomId, "canto");
         area = ds.GetRoomDataString(roomId, "area");
         background_img = ds.GetRoomDataString(roomId, "background_img");
-        music = ds.GetRoomDataString(roomId, "music");
+        music = ds.GetRoomDataInt(roomId, "music");
         room_sound_effect = ds.GetRoomDataString(roomId, "room_sound_effect");
         option1_sound_effect = ds.GetRoomDataString(roomId, "option1_sound_effect");
         option2_sound_effect = ds.GetRoomDataString(roomId, "option2_sound_effect");
@@ -1213,6 +1326,7 @@ public class VW_Gameloop : MonoBehaviour
         option3_bad_faith = ds.GetRoomDataInt(roomId, "option3_bad_faith");
         option3_bad_hope = ds.GetRoomDataInt(roomId, "option3_bad_hope");
         option3_bad_charity = ds.GetRoomDataInt(roomId, "option3_bad_charity");
+        Debug.Log("Done getting room data");
     }
 
     #endregion
