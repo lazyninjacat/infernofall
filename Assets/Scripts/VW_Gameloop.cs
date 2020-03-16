@@ -105,7 +105,7 @@ public class VW_Gameloop : MonoBehaviour
     public int Faith = 50;
     public int Hope = 50;
     public int Charity = 50;
-    
+
     // Room Data. Changes whenever a room method is invoked, e.g. _1_1()    
     private string option1BadOutcomeText = "";
     private string option2BadOutcomeText = "";
@@ -115,7 +115,7 @@ public class VW_Gameloop : MonoBehaviour
     private string option3GoodOutcomeText = "";
     private string option1NeutralOutcomeText = "";
     private string option2NeutralOutcomeText = "";
-    private string option3NeutralOutcomeText = "";            
+    private string option3NeutralOutcomeText = "";
 
     public int currentRoomId = 1;
     private bool firstRunDone;
@@ -233,7 +233,7 @@ public class VW_Gameloop : MonoBehaviour
         //Faith = PlayerPrefs.GetInt("FaithKey");
         //Hope = PlayerPrefs.GetInt("HopeKey");
         //Charity = PlayerPrefs.GetInt("CharityKey");
-        backgroundA = true;        
+        backgroundA = true;
         currentRoomId = 1;
         ChangeRoom();
         backgroundImgA.texture = Resources.Load<Texture2D>("SourceMaterial/Images/1_1");
@@ -242,7 +242,7 @@ public class VW_Gameloop : MonoBehaviour
 
 
     }
-    
+
     #endregion
 
     #region Gameplay Methods
@@ -250,8 +250,8 @@ public class VW_Gameloop : MonoBehaviour
     private void PreloadNextBackgroundImage(string URI)
     {
         nextBackgroundURI = URI;
-        HTTPRequest request = new HTTPRequest(new Uri(URI), OnRequestFinished);     
-        request.Send();                        
+        HTTPRequest request = new HTTPRequest(new Uri(URI), OnRequestFinished);
+        request.Send();
 
     }
 
@@ -302,7 +302,7 @@ public class VW_Gameloop : MonoBehaviour
                 PreloadNextBackgroundImage(nextBackgroundURI);
                 break;
         }
-                          
+
         //////////////////////////// Add downloaded image to backgroundA or B
         Debug.Log("Request Finished! Image received.");
 
@@ -335,11 +335,11 @@ public class VW_Gameloop : MonoBehaviour
 
     void Update()
     {
-       
+
     }
 
     public void StartSoundtrack()
-    {   
+    {
 
         StartCoroutine(GradualVolumeIncrease());
 
@@ -406,7 +406,7 @@ public class VW_Gameloop : MonoBehaviour
 
         if (activeYTPlayer == -1)
         {
-            ytplayer1.Play(SelectMusicString(music));            
+            ytplayer1.Play(SelectMusicString(music));
             ytplayer1.GetComponent<AudioSource>().volume = 0;
 
             for (int i = 0; i < 20; i++)
@@ -416,7 +416,7 @@ public class VW_Gameloop : MonoBehaviour
                 Debug.Log("timestep = " + i);
 
             }
-        }        
+        }
         else if (activeYTPlayer == 2)
         {
             ytplayer1.Play(SelectMusicString(music));
@@ -459,7 +459,7 @@ public class VW_Gameloop : MonoBehaviour
         {
             Debug.Log("Something went wrong. activeYTPlayer = " + activeYTPlayer);
         }
-        
+
     }
 
 
@@ -500,13 +500,14 @@ public class VW_Gameloop : MonoBehaviour
         if (virtuesPanel.activeSelf == false)
         {
             virtuesPanel.SetActive(true);
-        
-        } else
+
+        }
+        else
         {
             virtuesPanel.SetActive(false);
-        } 
+        }
     }
-    
+
     public void PressMapButton()
     {
         if (MapPanel.activeSelf == false)
@@ -522,13 +523,13 @@ public class VW_Gameloop : MonoBehaviour
     private IEnumerator StartFadeIn()
     {
         Debug.Log("Begin StartFadeIn coroutine");
-   
+
         TransitionFadeOutPanel.SetActive(true);
         virtuesPanel.SetActive(true);
         SetVirtueBars();
         virtuesPanel.SetActive(false);
         TransitionFadeOutPanel.GetComponent<Animation>().Play("TransitionPanelFadeIn");
-      
+
         yield return new WaitForSeconds(2);
         virtuesButton.gameObject.SetActive(true);
         mapButton.gameObject.SetActive(true);
@@ -543,7 +544,7 @@ public class VW_Gameloop : MonoBehaviour
         Debug.Log("Begin descriptionscroll coroutine");
         descriptionTextScroller.ResetPosition();
         descriptionPanel.SetActive(true);
-        descriptionTextScroller.scrolling = true;     
+        descriptionTextScroller.scrolling = true;
         yield return new WaitUntil(() => descriptionTextScroller.scrolling == false);
         promptTextGUI.gameObject.SetActive(true);
         //promptTextGUI.gameObject.GetComponent<Animation>().Play("RollOutcomeTextFadeIn");
@@ -642,8 +643,8 @@ public class VW_Gameloop : MonoBehaviour
 
         Debug.Log("Begin PressSourceTextButton method");
         descriptionPanel.SetActive(false);
-       
-        
+
+
         //PressAudioButton();
         sourceTextPanel.SetActive(true);
         sourceTextScroller.ResetPosition();
@@ -663,7 +664,7 @@ public class VW_Gameloop : MonoBehaviour
             //virtuesPanel.SetActive(false);
             firstRunDone = false;
         }
-        
+
         //firstRunDone = false;
         Debug.Log("End PressSourceTextButton method");
 
@@ -674,7 +675,7 @@ public class VW_Gameloop : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         //PressCloseSourceTextButton();
     }
-        
+
     private IEnumerator CloseSourceTextHelper()
     {
         yield return new WaitForSeconds(0.1f);
@@ -731,7 +732,7 @@ public class VW_Gameloop : MonoBehaviour
 
         CharityBar.fillAmount = Charity * 0.01f;
         CharityPercentText.text = Charity.ToString() + "%";
-      
+
 
 
     }
@@ -742,7 +743,7 @@ public class VW_Gameloop : MonoBehaviour
 
     private void GoodOutcome(string goodOutcomeText, int pru, int cou, int jus, int tem, int fai, int hop, int cha)
     {
-        
+
         rollOutcomeTextGUI.text = goodOutcomeText;
         if (cha != 0)
         {
@@ -868,7 +869,7 @@ public class VW_Gameloop : MonoBehaviour
             charityText.gameObject.SetActive(true);
             charityAmountText.gameObject.SetActive(true);
 
-            if(cha > 0)
+            if (cha > 0)
             {
                 charityAmountText.text = "+ " + cha.ToString();
             }
@@ -1005,7 +1006,7 @@ public class VW_Gameloop : MonoBehaviour
         SetVirtueBars();
         Debug.Log("End PressOption1Button method");
     }
-       
+
 
     public void PressOption2Button()
     {
@@ -1019,7 +1020,7 @@ public class VW_Gameloop : MonoBehaviour
 
         if (gbn == 1)
         {
-            GoodOutcome(option2_good_outcome_text, option2_good_prudence, option2_good_courage, option2_good_justice, option2_good_temperance, option2_good_faith, option2_good_hope, option2_good_charity);            
+            GoodOutcome(option2_good_outcome_text, option2_good_prudence, option2_good_courage, option2_good_justice, option2_good_temperance, option2_good_faith, option2_good_hope, option2_good_charity);
         }
         else if (gbn == 2)
         {
@@ -1107,7 +1108,7 @@ public class VW_Gameloop : MonoBehaviour
             backgroundImgA.gameObject.SetActive(true);
             backgroundA = true;
         }
-        ChangeRoom();        
+        ChangeRoom();
         TransitionFadeOutPanel.GetComponent<Animation>().Play("TransitionPanelFadeIn");
         yield return new WaitForSeconds(3);
         TransitionFadeOutPanel.SetActive(false);

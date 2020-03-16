@@ -28,8 +28,7 @@ public class VW_Start : MonoBehaviour
 
         ytPlayer.Play(music.Music1);
         ytPlayer.GetComponent<AudioSource>().volume = 0.25f;
-        Debug.Log("music supposed to be playing = " + music.Music1);
-        Debug.Log("music actually playing = " + ytPlayer.videoPlayer.url);
+
 
     }
 
